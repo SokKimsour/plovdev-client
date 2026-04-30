@@ -26,6 +26,9 @@ app.use('/api/v1', courseRoutes);
 const sectionRoutes = require('./src/routes/Section.route');
 app.use('/api/v1', sectionRoutes);
 
+const lessonRoutes = require('./src/routes/Lesson.route');
+app.use('/api/v1', lessonRoutes);
+
 
 
 app.listen(port, () => {
