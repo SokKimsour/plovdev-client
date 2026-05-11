@@ -182,25 +182,17 @@ const logout = async (req, res) => {
     if (!refreshToken) {
       return res.status(400).json({ message: "Refresh token is required!" });
     }
+    
+    // LOGOUT CURRENTLY DEVICE ONLY
+    const deleteToken = await token.destroy({
+      where : {userId : req.user.id , token :  refreshToken}
+    })
 
-    const token = await refreshTokens.findOne({
-      where: {
-        token: refreshToken,
-        is_revoked: false,
-        expireAt: { [Op.gt]: new Date() },
-      },
-    });
-
-    if (!token) {
+    if (!deleteToken) {
       return res
         .status(404)
         .json({ message: "Token not found or already revoked!" });
     }
-
-    await refreshTokens.update(
-      { is_revoked: true },
-      { where: { token: refreshToken } },
-    );
 
     res.json({ message: "Logout successful" });
   } catch (error) {

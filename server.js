@@ -3,6 +3,8 @@ require('dotenv').config();
 const express = require('express')
 const morgan = require('morgan');
 const passport = require("passport") ;
+const Op = require('sequelize');
+const cron = require('node-cron');
 require("./src/config/passport")
 
 const app = express()
@@ -33,6 +35,18 @@ app.use('/api/v1', sectionRoutes);
 
 const lessonRoutes = require('./src/routes/Lesson.route');
 app.use('/api/v1', lessonRoutes);
+
+// CLEAUP EXPIRED TOKENS EVERY AT MIDNIGHT
+// THIS ONE IS IS USE FOR TO DELETE THE TOKEN THAT HAS BEEN EXPIRED
+cron.schedule('0 0 * * *', async () => {
+  try {
+    const deleted = await refreshTokens.destroy({
+      where: { expireAt: { [Op.lt]: new Date() } }
+    });
+  } catch (error) {
+    console.error('Cleanup failed:', error.message);
+  }
+});
 
 app.listen(port, () => {
   console.log(`Running on port: ${port}`)
