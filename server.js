@@ -34,8 +34,6 @@ app.use('/api/v1', sectionRoutes);
 const lessonRoutes = require('./src/routes/Lesson.route');
 app.use('/api/v1', lessonRoutes);
 
-
-
 app.listen(port, () => {
   console.log(`Running on port: ${port}`)
 })

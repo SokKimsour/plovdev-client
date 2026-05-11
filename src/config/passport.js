@@ -12,21 +12,19 @@ passport.use(new GoogleStrategy({
     try {
       const email = profile.emails[0].value;
       
-      // 1. Check if user already exists
-      let user = await Users.findOne({ where: { email } });
+      // 1. Check existing user first (Fast)
+      const start = Date.now();
+      let user = await Users.findOne({ where: { email } ,   attributes: ['id', 'role', 'google_id']  });
+      console.log('DB lookup took:', Date.now() - start, 'ms');
 
       if (user) {
-        // If they exist but don't have a google_id, link it now
         if (!user.google_id) {
-          await user.update({ 
-            google_id: profile.id, 
-            auth_provider: 'google' 
-          });
+          await user.update({ google_id: profile.id, auth_provider: 'google' });
         }
         return done(null, user);
       }
 
-      // 2. If user doesn't exist, create them with NULL password
+      // 2. Only run this logic for NEW users (Saves time for returning users)
       const userName = await generateUsername(profile.displayName);
       
       user = await Users.create({
@@ -35,9 +33,9 @@ passport.use(new GoogleStrategy({
         email: email,
         google_id: profile.id,
         auth_provider: 'google',
-        password: null,      // THIS IS THE NULLABLE PASSWORD
-        is_verified: true,   // Google already verified their email
-        role: 'teacher'      // Or your default role
+        password: null,
+        is_verified: true,
+        role: 'user'
       });
 
       return done(null, user);
@@ -50,6 +48,8 @@ passport.use(new GoogleStrategy({
 // These are required for Passport to track the user session internally
 passport.serializeUser((user, done) => done(null, user.id));
 passport.deserializeUser(async (id, done) => {
-  const user = await Users.findByPk(id);
+  const user = await Users.findByPk(id, {
+  attributes: ['id', 'email', 'role'] // Skip fetching heavy columns like 'bio' or 'createdAt'
+  });
   done(null, user);
 });

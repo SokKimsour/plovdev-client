@@ -454,15 +454,16 @@ const getMe = async (req, res) => {
 };
 
 // LOGIN WITH GOOGLE  
-const loginOrSignInWIthGoogle = async (req , res) => {
+const loginWIthGoogle = async (req , res) => {
   try {
-
     const  user = req.user ;
 
     if (!user) {
       return res.status(404).json({
         message  : "User not found!" 
       })
+     // FOR FRONTEND
+      //  return res.redirect(`http://localhost:5173/login?error=user_not_found`); 
     }
 
     // generate access token
@@ -504,5 +505,5 @@ module.exports = {
   changePassword ,
   verifyForgotOtp,
   resetPassword,
-  loginOrSignInWIthGoogle
+  loginWIthGoogle
 };

@@ -70,9 +70,17 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
+      is_active: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
+      is_blocked: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
       role: {
-        type: DataTypes.ENUM("student", "teacher", "admin"),
-        defaultValue: "student",
+        type: DataTypes.ENUM("admin" , "user"),
+        defaultValue: "user",
       },
     },
     {

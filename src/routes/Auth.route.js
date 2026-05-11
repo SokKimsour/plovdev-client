@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { register , login , logout , refreshToken , getMe , forgotPassword , verifyForgotOtp , resetPassword , changePassword , loginOrSignInWIthGoogle} = require('../controller/Auth.controller');
+const { register , login , logout , refreshToken , getMe , forgotPassword , verifyForgotOtp , resetPassword , changePassword , loginWIthGoogle} = require('../controller/Auth.controller');
 const { loginLimiter } = require('../middlewares/rateLimits');
 const { authenticateToken } = require('../middlewares/authMiddleWare');
 const passport = require('passport');
@@ -12,7 +12,7 @@ router.post('/auth/logout',  /* #swagger.tags = ['Auth'] */   logout);
 router.get('/users/me'  /* #swagger.tags = ['Auth'] */, authenticateToken , getMe);
 
 // login with google
-router.get("/auth/google/callback" ,  /* #swagger.tags = ['Auth'] */  passport.authenticate('google', { scope: ['profile', 'email']  , session: false, failureRedirect: '/http://localhost:5173/login' }) , loginOrSignInWIthGoogle)
+router.get("/auth/google/callback" ,  /* #swagger.tags = ['Auth'] */  passport.authenticate('google', { scope: ['profile', 'email']  , session: false, failureRedirect: '/http://localhost:5173/login' }) , loginWIthGoogle)
 
 router.post('/auth/change-password',  /* #swagger.tags = ['Auth'] */ authenticateToken ,changePassword)  ;
 
