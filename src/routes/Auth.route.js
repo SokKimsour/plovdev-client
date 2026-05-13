@@ -12,9 +12,19 @@ router.post('/auth/logout',  /* #swagger.tags = ['Auth'] */  authenticateToken ,
 router.get('/users/me'  /* #swagger.tags = ['Auth'] */, authenticateToken , getMe);
 
 // LOGIN WITH GOOGLE
-router.get("/auth/google/callback" ,  /* #swagger.tags = ['Auth'] */  passport.authenticate('google', { scope: ['profile', 'email'] 
- , session: false, failureRedirect: 
- '/http://localhost:5173/login' }) , loginWIthGoogle)
+router.get('/auth/google',
+  passport.authenticate('google', { 
+    scope: ['profile', 'email'] 
+  })
+)
+
+router.get('/auth/google/callback',
+  passport.authenticate('google', { 
+    session: false,
+    failureRedirect: 'http://localhost:5173/login'  
+  }),
+  loginWIthGoogle  
+)
 
 router.post('/auth/change-password',  /* #swagger.tags = ['Auth'] */ authenticateToken ,changePassword)  ;
 

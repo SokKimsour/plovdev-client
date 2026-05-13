@@ -72,7 +72,7 @@ const register = async (req, res) => {
       email,
       password: hashPassword,
       gender,
-      role: "teacher",
+      role: "user",
       auth_provider : "local"
     });
 
@@ -111,10 +111,9 @@ const login = async (req, res) => {
   }
 
     // add col is_active and is_blocked
-//    if (!user.is_active || user.is_blocked) {
-//   return res.status(403).json({ message: "Your account has been suspended!" })
-// }
-
+    //    if (!user.is_active || user.is_blocked) {
+    //   return res.status(403).json({ message: "Your account has been suspended!" })
+    // }
 
     // COMPARE PASSWORD
     const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -164,6 +163,13 @@ const login = async (req, res) => {
       userId: user.id,
     });
 
+    res.cookie("refreshToken" , refreshToken , {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', 
+      sameSite: 'strict',
+      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+    })
+
     res.json({
       message: "Login successful",
       token: token,
@@ -177,7 +183,7 @@ const login = async (req, res) => {
 // LOGOUT
 const logout = async (req, res) => {
   try {
-    const { refreshToken } = req.body;
+    const refreshToken = req.cookies.refreshToken 
 
     if (!refreshToken) {
       return res.status(400).json({ message: "Refresh token is required!" });
@@ -194,12 +200,14 @@ const logout = async (req, res) => {
         .json({ message: "Token not found or already revoked!" });
     }
 
+    // CLEAR COOKIE
+    res.clearCookie('refreshToken');
+
     res.json({ message: "Logout successful" });
   } catch (error) {
     res.status(500).json({ messageError: error.message });
   }
 };
-
 
 const changePassword = async (req , res) => {
   try {
@@ -392,7 +400,7 @@ const resetPassword = async (req, res) => {
 // REFRESH TOKEN
 const refreshToken = async (req, res) => {
   try {
-    const { refreshToken } = req.body;
+    const refreshToken = req.cookies.refreshToken 
 
     if (!refreshToken) {
       return res.status(400).json({ message: "Refresh token is required!" });
@@ -483,6 +491,13 @@ const loginWIthGoogle = async (req , res) => {
       token : refreshToken , 
       expireAt :  new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       userId : user.id
+    })
+
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 7 * 24 * 60 * 60 * 1000
     })
 
     // redirect to frontend

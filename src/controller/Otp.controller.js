@@ -66,6 +66,13 @@ const verifyOtp = async (req, res) => {
         { is_verified: true },
       )
 
+      res.cookie("refreshToken" , refreshToken , {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        maxAge: 7 * 24 * 60 * 60 * 1000
+      })
+
     res.json({ message: 'Email verified successfully and login successfully!' , 
       user : userWithName ,
       token : {
