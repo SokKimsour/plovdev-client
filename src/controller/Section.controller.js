@@ -26,7 +26,10 @@ const createSection = async (req, res) => {
       include: [{
         model: courses,
         as: 'course',
-        attributes: ['id', 'title_en']
+        attributes: ['id', 'title_en'] ,
+        include : [{
+          model : sections , as : "section"
+        }]
       }]
     });
 
@@ -35,7 +38,6 @@ const createSection = async (req, res) => {
     res.status(500).json({ messageError: error.message });
   }
 };
-
 
 // UPDATE SECTION
 const updateSection = async (req, res) => {
@@ -67,7 +69,6 @@ const updateSection = async (req, res) => {
         attributes: ['id', 'title']
       }]
     });
-
 
     res.json({ message: 'Section updated successfully!', sectionWithCourse });
   } catch (error) {
@@ -142,7 +143,6 @@ const getSections = async (req, res) => {
     res.status(500).json({ messageError: error.message });
   }
 };
-
 
 module.exports = {
   createSection,

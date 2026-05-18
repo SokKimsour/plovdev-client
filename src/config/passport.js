@@ -49,7 +49,7 @@ passport.use(new GoogleStrategy({
 passport.serializeUser((user, done) => done(null, user.id));
 passport.deserializeUser(async (id, done) => {
   const user = await Users.findByPk(id, {
-  attributes: ['id', 'email', 'role'] // Skip fetching heavy columns like 'bio' or 'createdAt'
+  attributes: ['id', 'role', 'google_id'] // Skip fetching heavy columns like 'bio' or 'createdAt'
   });
   done(null, user);
 });

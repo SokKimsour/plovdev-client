@@ -2,7 +2,7 @@ const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
   info: {
-    title: 'My API',
+    title: 'PlovDev API',
     description: 'API Documentation'
   },
   host: 'localhost:3000',
@@ -14,6 +14,7 @@ const doc = {
     {name : "Course" , description : "Course endpoints"} ,
     {name : "Section" , description : "Section endpoints"} ,
     {name : "Lesson" , description : "Lesson endpoints"} ,
+    {name : "Category" , description : "Category endpoints"} ,
   ]
 };
 

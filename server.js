@@ -5,13 +5,25 @@ const morgan = require('morgan');
 const passport = require("passport") ;
 const Op = require('sequelize');
 const cron = require('node-cron');
+const cors =  require("cors")
+const cookieParser = require("cookie-parser")
 require("./src/config/passport")
 
 const app = express()
 app.use(express.json())
 app.use(morgan('dev'));
 app.use(passport.initialize())
+app.use(cookieParser()); 
 const port = 3000
+
+app.use(cors({
+  origin: process.env.FRONTEND_URL,
+  credentials: true ,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  exposedHeaders: ['Authorization'] 
+}));
+
+app.set("trust proxy" , 1)
 
 // Swagger api docs
 const swaggerUi = require('swagger-ui-express');
@@ -36,16 +48,61 @@ app.use('/api/v1', sectionRoutes);
 const lessonRoutes = require('./src/routes/Lesson.route');
 app.use('/api/v1', lessonRoutes);
 
+const categoryRoutes = require('./src/routes/Categories.route');
+app.use('/api/v1', categoryRoutes);
+
+
+app.get("/health" , (req , res) => {
+  try {
+      res.json({
+        message : "Backend is good!"
+      })
+  } catch (error) {
+    res.status(500).json({
+      message : error.message
+    })
+  }
+})
+
 // CLEAUP EXPIRED TOKENS EVERY AT MIDNIGHT
 // THIS ONE IS IS USE FOR TO DELETE THE TOKEN THAT HAS BEEN EXPIRED
 cron.schedule('0 0 * * *', async () => {
   try {
     const deleted = await refreshTokens.destroy({
-      where: { expireAt: { [Op.lt]: new Date() } }
+      where: {
+        [Op.or]: [
+          { expireAt: { [Op.lt]: new Date() } }, // expired
+          { is_revoked: true }                    // revoked but not expired yet
+        ]
+      }
     });
+    console.log(`Cleaned up ${deleted} tokens`);
   } catch (error) {
     console.error('Cleanup failed:', error.message);
   }
+});
+
+// ==========================================
+//  GLOBAL ERROR HANDLING MIDDLEWARE 
+// ==========================================
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
+
+  // Handle Sequelize validation or unique constraint errors cleanly
+  if (err.name === 'SequelizeUniqueConstraintError' || err.name === 'SequelizeValidationError') {
+    return res.status(400).json({
+      status: 'fail',
+      message: err.errors?.[0]?.message || "Database validation failed"
+    });
+  }
+
+  res.status(statusCode).json({
+    status: statusCode >= 400 && statusCode < 500 ? "fail" : "error",
+    message: message,
+    // Stack trace shows only in development mode to save your terminal space
+    ...(process.env.NODE_ENV === "development" && { stack: err.stack })
+  });
 });
 
 app.listen(port, () => {

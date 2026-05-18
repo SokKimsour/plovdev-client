@@ -24,6 +24,11 @@ module.exports = (sequelize, DataTypes) => {
         as : "sections"
     })
 
+      this.belongsToMany(models.categories , {
+        through: models.course_categories,
+        foreignKey : "courseId" ,
+        as : "category"
+    })
     }
   }
   courses.init(
@@ -92,6 +97,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      rejected_reason: {
+        type: DataTypes.TEXT,
+        allowNull : true
+      }
     },
     {
       sequelize,
