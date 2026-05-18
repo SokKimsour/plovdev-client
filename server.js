@@ -19,7 +19,8 @@ const port = 3000
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true ,
-  methods: ['GET', 'POST', 'PUT', 'DELETE']
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  exposedHeaders: ['Authorization'] 
 }));
 
 app.set("trust proxy" , 1)
@@ -46,6 +47,10 @@ app.use('/api/v1', sectionRoutes);
 
 const lessonRoutes = require('./src/routes/Lesson.route');
 app.use('/api/v1', lessonRoutes);
+
+const categoryRoutes = require('./src/routes/Categories.route');
+app.use('/api/v1', categoryRoutes);
+
 
 app.get("/health" , (req , res) => {
   try {
@@ -75,6 +80,29 @@ cron.schedule('0 0 * * *', async () => {
   } catch (error) {
     console.error('Cleanup failed:', error.message);
   }
+});
+
+// ==========================================
+//  GLOBAL ERROR HANDLING MIDDLEWARE 
+// ==========================================
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
+
+  // Handle Sequelize validation or unique constraint errors cleanly
+  if (err.name === 'SequelizeUniqueConstraintError' || err.name === 'SequelizeValidationError') {
+    return res.status(400).json({
+      status: 'fail',
+      message: err.errors?.[0]?.message || "Database validation failed"
+    });
+  }
+
+  res.status(statusCode).json({
+    status: statusCode >= 400 && statusCode < 500 ? "fail" : "error",
+    message: message,
+    // Stack trace shows only in development mode to save your terminal space
+    ...(process.env.NODE_ENV === "development" && { stack: err.stack })
+  });
 });
 
 app.listen(port, () => {

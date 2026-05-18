@@ -605,7 +605,7 @@ const loginWIthGoogle = async (req, res) => {
     // redirect to frontend
     res.redirect(`${process.env.FRONTEND_URL}/?token=${accesstoken}`);
   } catch (error) {
-    res.redirect(`http://localhost:5173/login?error=server_error`);
+    res.redirect(`${process.env.FRONTEND_URL}/login?error=server_error`);
   }
 };
 

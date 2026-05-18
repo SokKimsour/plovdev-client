@@ -115,11 +115,11 @@ const updateCourse = async (req, res) => {
 
     // UPDATE COURSE
     await course.update({
-      title_en: title_en || course.title_en,
-      description: description || course.description,
+      title_en: title_en ?? course.title_en,
+      description: description ?? course.description,
       price: parsedPrice,
       original_price: parsedOriginalPrice,
-      what_you_learn: what_you_learn || course.what_you_learn,
+      what_you_learn: what_you_learn ?? course.what_you_learn,
       thumbnailUrl,
       thumbnailPublicId,
     });
@@ -136,34 +136,51 @@ const updateCourse = async (req, res) => {
 // COURSE FOR STUDENTS
 const viewCourse = async (req, res) => {
   try {
-    const allCourses = await courses.findAll({ 
-      where : {status : 'published'} ,
+    const { page = 1, limit = 12 } = req.query;
+    const offset = (page - 1) * limit;
+
+    const { count, rows: allCourses } = await courses.findAndCountAll({
+      // where: { status: 'published' },
+      limit: parseInt(limit),
+      offset: parseInt(offset),
+      distinct: true,  //  needed with include to get correct count
       include: [
         {
           model: Users,
-          as: "teacher",
-          attributes: ["id", "fullName", "userName"],
+          as: 'teacher',
+          attributes: ['id', 'fullName', 'userName']
+        },
+        {
+          model: categories,
+          as: 'categories',
+          attributes: ['id', 'name', 'iconUrl'],
+          through: { attributes: [] }
         },
         {
           model: sections,
           as: 'sections',
           attributes: ['id', 'title', 'position'],
-          include: [
-            {
-              model: lessons,
-              as: 'lessons',
-              attributes: ['id', 'title', 'duration_secs', 'is_free_preview', 'position']
-              // videoUrl excluded for security — only enrolled students get it
-            }
-          ]
+          separate: true,  // ← reliable ordering
+          order: [['position', 'ASC']],
+          include: [{
+            model: lessons,
+            as: 'lessons',
+            attributes: ['id', 'title', 'duration_secs', 'is_free_preview', 'position'],
+            separate: true,
+            order: [['position', 'ASC']]
+          }]
         }
-      ],
+      ]
     });
 
     res.json({
       message: "Courses retrieved successfully!",
-      courses: allCourses,
+      total: count,
+      page: parseInt(page),
+      totalPages: Math.ceil(count / limit),
+      courses: allCourses
     });
+
   } catch (error) {
     res.status(500).json({ messageError: error.message });
   }
@@ -172,36 +189,44 @@ const viewCourse = async (req, res) => {
 const viewCourseById = async (req, res) => {
   try {
     const { courseId } = req.params;
-    const course = await courses.findByPk(courseId, {
+
+    const course = await courses.findOne({
+      where: { id: courseId },
       include: [
         {
           model: Users,
-          as: "teacher",
-          attributes: ["id", "fullName", "userName"],
+          as: 'teacher',
+          attributes: ['id', 'fullName', 'userName']
         },
-            {
+        {
+          model: categories,
+          as: 'categories',
+          attributes: ['id', 'name', 'iconUrl'],
+          through: { attributes: [] }
+        },
+        {
           model: sections,
           as: 'sections',
           attributes: ['id', 'title', 'position'],
-          include: [
-            {
-              model: lessons,
-              as: 'lessons',
-              attributes: ['id', 'title', 'duration_secs', 'is_free_preview', 'position']
-              // videoUrl excluded for security — only enrolled students get it
-            }
-          ]
+          separate: true,
+          order: [['position', 'ASC']],
+          include: [{
+            model: lessons,
+            as: 'lessons',
+            attributes: ['id', 'title', 'duration_secs', 'is_free_preview', 'position'],
+            separate: true,
+            order: [['position', 'ASC']]
+          }]
         }
-      ],
+      ]
     });
 
     if (!course) {
-      return res.status(404).json({
-        message : "Course not found!"
-      })
+      return res.status(404).json({ message: "Course not found!" });
     }
 
     res.json({ message: "Course retrieved successfully!", course });
+
   } catch (error) {
     res.status(500).json({ messageError: error.message });
   }
