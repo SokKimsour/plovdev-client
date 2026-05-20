@@ -1,11 +1,9 @@
-const { Users, courses , sections , lessons } = require("../models");
+const { Users, courses , sections , lessons ,categories } = require("../models");
 const {
   uploadBufferImageToCloudinary,
 } = require("../utils/uploadToCloudinary");
 
 const cloudinary = require("../config/cloudinary");
-const { where } = require("sequelize");
-const { format } = require("morgan");
 
 const createCourse = async (req, res) => {
   try {
@@ -235,18 +233,29 @@ const viewCourseById = async (req, res) => {
 // DELETE COURSE
 const deleteCourse = async (req, res) => {
   try {
-    const teacherId = req.user.id   // declare as a teacher easy to understand
+    const teacherId = req.user.id
     const { courseId } = req.params
 
     // FIND COURSE
     const course = await courses.findOne({
-      where: req.user.role === 'admin' 
-        ? { id: courseId }           // admin can delete any course
-        : { id: courseId, teacherId } // teacher can only delete their own
+      where: req.user.role === 'admin'
+        ? { id: courseId }
+        : { id: courseId, teacherId }
     })
 
     if (!course) {
       return res.status(404).json({ message: 'Course not found!' })
+    }
+
+    // DELETE ALL LESSON VIDEOS FROM CLOUDINARY
+    const allSections = await sections.findAll({ where: { courseId } })
+    for (let section of allSections) {
+      const allLessons = await lessons.findAll({ where: { sectionId: section.id } })
+      for (let lesson of allLessons) {
+        if (lesson.videoPublicId) {
+          await cloudinary.uploader.destroy(lesson.videoPublicId, { resource_type: 'video' })
+        }
+      }
     }
 
     // DELETE THUMBNAIL FROM CLOUDINARY
@@ -254,7 +263,7 @@ const deleteCourse = async (req, res) => {
       await cloudinary.uploader.destroy(course.thumbnailPublicId)
     }
 
-    // DELETE COURSE
+    // DELETE COURSE (CASCADE deletes sections and lessons from DB)
     await course.destroy()
 
     res.json({ message: 'Course deleted successfully!' })
@@ -265,7 +274,7 @@ const deleteCourse = async (req, res) => {
 }
 
 // PUBLISH COURSE , ADMIN APPROVE FIRST BEFORE PUBLISH THE COURSE
-const publishCourse = async (req, res) => {
+const submitCourse = async (req, res) => {
   try {
     const teacherId = req.user.id // declare as a teacher easy to understand
     const { courseId } = req.params
@@ -277,6 +286,14 @@ const publishCourse = async (req, res) => {
 
     if (!course) {
       return res.status(404).json({ message: 'Course not found!' })
+    }
+
+    // VALIDATE THE SECTIONS
+    const sections = await sections.count({where : {courseId}})
+    if (sections === 0) {
+      return res.status(400).json({
+        message : "Please add at least one section before submitting the course!"
+      })
     }
 
     // TOGGLE PUBLISH STATUS
@@ -359,13 +376,47 @@ const viewCourseContent = async (req, res) => {
   }
 }
 
+
+// ARCHIEVED COURSE
+// need this for teacher to archive published course
+const archiveCourse = async (req, res) => {
+  try {
+    const { courseId } = req.params
+    const teacherId = req.user.id
+
+    const course = await courses.findOne({
+      where: { id: courseId, teacherId }
+    })
+
+    if (!course) {
+      return res.status(404).json({ message: 'Course not found!' })
+    }
+
+    if (course.status !== 'published') {
+      return res.status(400).json({ message: 'Only published courses can be archived!' })
+    }
+
+    await course.update({
+      status: 'archived',
+      archivedAt: new Date()
+    })
+
+    res.json({ message: 'Course archived successfully!' })
+
+  } catch (error) {
+    res.status(500).json({ messageError: error.message })
+  }
+}
+
+
 module.exports = {
   createCourse,
   viewCourse,
   viewCourseById,
   updateCourse,
   deleteCourse,
-  publishCourse ,
+  submitCourse ,
   getTeacherCourses,
-  viewCourseContent
+  viewCourseContent,
+  archiveCourse
 };

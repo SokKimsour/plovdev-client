@@ -74,7 +74,7 @@ const createLesson = async (req, res) => {
       }]
     });
 
-    res.status(201).json({ message: 'Lesson created successfully!', lessonWithSection });
+    res.status(201).json({ message: 'Lesson created successfully!', lessons : lessonWithSection });
   } catch (error) {
     res.status(500).json({ messageError: error.message });
   }

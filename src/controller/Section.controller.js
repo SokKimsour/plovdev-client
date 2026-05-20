@@ -33,7 +33,7 @@ const createSection = async (req, res) => {
       }]
     });
 
-    res.status(201).json({ message: 'Section created successfully!', sectionWithCourse });
+    res.status(201).json({ message: 'Section created successfully!' , section : sectionWithCourse });
   } catch (error) {
     res.status(500).json({ messageError: error.message });
   }
