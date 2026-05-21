@@ -36,6 +36,13 @@ app.use('/api/v1', authRoutes);
 const otpRoutes = require('./src/routes/Otp.route');
 app.use('/api/v1', otpRoutes);
 
+const adminRoutes = require('./src/routes/Admin.route');
+app.use('/api/v1/admin', adminRoutes);
+
+const telegramRoutes = require('./src/routes/Telegram.route');
+app.use('/telegram', telegramRoutes);
+
+
 const teacherRoutes = require('./src/routes/UserProfile.route');
 app.use('/api/v1', teacherRoutes);
 
