@@ -136,11 +136,12 @@ const updateCourse = async (req, res) => {
     });
 
       if (category_id) {
-      await course_categories.create({
-        courseId: course.id,
-        categoryId: parseInt(category_id)
-      })
-    }
+        await course_categories.destroy({ where: { courseId: course.id } });
+        await course_categories.create({
+          courseId: course.id,
+          categoryId: parseInt(category_id)
+        });
+      }
 
       const courseWithTeacher = await courses.findOne({
       where: {id : course.id },

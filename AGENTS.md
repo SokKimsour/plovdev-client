@@ -73,8 +73,6 @@ backend/
 │   ├── courses.js
 │   ├── sections.js
 │   ├── lessons.js
-│   ├── tags.js
-│   ├── course_tags.js
 │   ├── quizzes.js
 │   ├── quiz_questions.js
 │   ├── enrollments.js
@@ -297,12 +295,6 @@ GET    /api/v1/sections/:sectionId/lessons
 PUT    /api/v1/lessons/:lessonId
 DELETE /api/v1/lessons/:lessonId
 GET    /api/v1/lessons/:lessonId
-
-### Tags
-GET    /api/v1/tags
-POST   /api/v1/tags
-POST   /api/v1/courses/:courseId/tags/:tagId
-DELETE /api/v1/courses/:courseId/tags/:tagId
 
 ### Enrollments
 POST   /api/v1/enrollments

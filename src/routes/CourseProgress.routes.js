@@ -13,14 +13,12 @@ router.patch(
   /* #swagger.tags = ['Course Progress'] */ authenticateToken,
   toggleLessonProgress
 );
-
 // Get the authenticated user's overall progress for a course
 router.get(
   '/courses/:courseId/progress/me',
   /* #swagger.tags = ['Course Progress'] */ authenticateToken,
   getMyCourseProgress
 );
-
 // Get all completed lessons for the authenticated user in a course
 router.get(
   '/courses/:courseId/progress/lessons',

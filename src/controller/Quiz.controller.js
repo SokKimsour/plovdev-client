@@ -1,4 +1,4 @@
-const { Quiz, QuizQuestion, QuizAttempt, Certificate, course_progress } = require('../models');
+const { Quiz, QuizQuestion, QuizAttempt, Certificate, course_progress , courses } = require('../models');
 const AppError = require('../utils/appError');
 const { v4: uuidv4 } = require('uuid');
 
@@ -20,6 +20,11 @@ const createQuiz = async (req, res) => {
   // Create Then Fetch Pattern
   const newQuiz = await Quiz.findOne({
     where: { id: quiz.id },
+    include : [
+      {
+        model : sections , as : "section"
+      }
+    ]
   });
 
   res.status(201).json({
@@ -32,6 +37,7 @@ const createQuiz = async (req, res) => {
 const addQuestions = async (req, res) => {
   const { quizId } = req.params;
   const { questions } = req.body;
+  const teacherId = req.user.id
 
   if (!questions || !Array.isArray(questions) || questions.length === 0) {
     throw new AppError('An array of questions is required!', 400);
@@ -42,12 +48,21 @@ const addQuestions = async (req, res) => {
     throw new AppError('Quiz not found!', 404);
   }
 
-  const formattedQuestions = questions.map((q) => ({
+  const course = await courses.findByPk(quiz.courseId) ;
+  if (!course) {
+    throw new AppError("Course not found!", 400)
+  }
+  
+  if (req.user.role !== 'admin' && course.teacherId !== teacherId) {
+    throw new AppError("You do not have permission to add questions to this course", 403)
+  }
+
+  const formattedQuestions = questions.map((q, index) => ({
     question: q.question,
     options: q.options, // Extracted directly as JSONB objects
     correct_answer: q.correct_answer,
     explanation: q.explanation,
-    position: q.position ? parseInt(q.position) : 1,
+    position: q.position ? parseInt(q.position) : index + 1,
     quizId,
   }));
 

@@ -67,7 +67,7 @@ const updateSection = async (req, res) => {
     include: [{
         model: courses,
         as: 'course',
-        attributes: ['id', 'title']
+        attributes: ['id', 'title_en']
       }]
     });
 
