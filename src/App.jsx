@@ -8,6 +8,7 @@ import JobBoardPage from './pages/public/JobBoardPage'
 import Navbarhomepage from './components/layout/NavbarHomepage'
 import Footer from './components/layout/Footer'
 import NavbarLogin from './components/layout/NavbarLogin'
+import SidebarUser from './components/layout/SidebarUser'
 function App() {
 
   return (
@@ -26,6 +27,8 @@ function App() {
       <Footer />
 
       <NavbarLogin />
+
+      <SidebarUser />
       
       </div>
       </div>

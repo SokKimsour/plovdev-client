@@ -56,8 +56,8 @@ const NavbarLogin = () => {
               </div>
           
           <div className='flex items-center gap-2'>
-            <div className=' max-sm:hidden'><NavLink to="/instructor" className='hover:text-teal-500  duration-200'>Sign In</NavLink></div>
-            <div className=' max-sm:hidden'><NavLink to="/mylearning" className='hover:text-white text-white  bg-teal-400 rounded-md active:text-black p-2 duration-200'>
+            <div className=' max-sm:hidden'><NavLink to="/login" className='hover:text-teal-500  duration-200'>Sign In</NavLink></div>
+            <div className=' max-sm:hidden'><NavLink to="/signup" className='hover:text-white text-white  bg-teal-400 rounded-md active:text-black p-2 duration-200'>
             Signup Free</NavLink></div>
             
             <div className='lg:hidden h-[40px] w-[52px] rounded-md  border-2 border-solid border-gray-200 ' onClick={()=>IsmenuOpen(!menuOpen)}> 
