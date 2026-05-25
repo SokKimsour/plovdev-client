@@ -1,7 +1,11 @@
+import Footer from "./components/layout/Footer"
+
 function App() {
   return (
     <div>
-      <h1>PlovDev</h1>
+      
+      <Footer />
+      
     </div>
   )
 }
