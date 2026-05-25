@@ -16,8 +16,8 @@ const Navbarhomepage = () => {
   }, []);
 
   return (
-    <nav className='fixed top-0 left-0 w-full z-10  z-50  pt-4 '>
-      <div className='bg-white/50 backdrop-blur-sm flex justify-center items-center text-lg  max-w-[1440px] max-2xl:w-[96%] mx-auto rounded-3xl border-1 border-amber-300/90
+    <nav className='fixed top-0 left-0 w-full   z-50  pt-4 '>
+      <div className='bg-white/50 backdrop-blur-sm flex justify-center items-center text-lg  max-w-[80%] max-2xl:w-[96%] mx-auto rounded-3xl border-1 border-amber-300/90
  '>
 
         <div className=' flex justify-between items-center xl:w-[75%] max-2xl:w-[96%] m-4 gap-6 '>
