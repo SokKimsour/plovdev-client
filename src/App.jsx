@@ -9,6 +9,7 @@ import Navbarhomepage from './components/layout/NavbarHomepage'
 import Footer from './components/layout/Footer'
 import NavbarLogin from './components/layout/NavbarLogin'
 import SidebarUser from './components/layout/SidebarUser'
+import SidebarAdmin from './components/layout/SidebarAdmin'
 function App() {
 
   return (
@@ -29,6 +30,7 @@ function App() {
       <NavbarLogin />
 
       <SidebarUser />
+      <SidebarAdmin />
       
       </div>
       </div>
