@@ -1,19 +1,20 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
-const Navbarhomepage = () => {
+const NavbarAfterLogin = () => {
   const [menuOpen, IsmenuOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false);
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 24);
-    };
+  
+  // const [isScrolled, setIsScrolled] = useState(false);
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     setIsScrolled(window.scrollY > 24);
+  //   };
 
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
+  //   handleScroll();
+  //   window.addEventListener("scroll", handleScroll);
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
 
   return (
     <nav className='fixed top-0 left-0 w-full   z-50  pt-4 '>
@@ -141,4 +142,4 @@ const Navbarhomepage = () => {
   )
 }
 
-export default Navbarhomepage
+export default NavbarAfterLogin

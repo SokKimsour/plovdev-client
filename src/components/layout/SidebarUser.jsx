@@ -15,7 +15,7 @@ const SidebarUser = () => {
     <nav>
       <ul className='m-8 py-8  items-center w-[250px] bg-white rounded-lg shadow-lg '>
 
-        <div className='mx-2 font-bold text-xs text-gray-500'> OVERVIEW </div>
+        <div className='mx-2 my-8 font-bold text-xs text-black'> OVERVIEW </div>
 
         <li className='p-4' ><NavLink to="/dashboard" className='hover:text-teal-500 gap-2 duration-200 flex items-center pointer'>
           <MdOutlineDashboard /> Dashboard
@@ -26,7 +26,7 @@ const SidebarUser = () => {
         <li className='p-4'><NavLink to="/mylearning" className='hover:text-teal-500 gap-2 duration-200 flex items-center pointer'><LiaLaptopCodeSolid /> My Learning</NavLink></li>
         <li className='p-4'><NavLink to="/student" className='hover:text-teal-500 gap-2 duration-200 flex items-center pointer'><PiStudent /> Student</NavLink> </li>
 
-        <div className='mx-2 font-bold text-xs text-gray-500'> CONTENT </div>
+        <div className='mx-2 my-8  font-bold text-xs text-black'> CONTENT </div>
 
 
         <li className='p-4'><NavLink to="/createcourse" className='hover:text-teal-500 gap-2 duration-200 flex items-center pointer'><FaPlus /> Create Course
@@ -35,7 +35,7 @@ const SidebarUser = () => {
         <li className='p-4'><NavLink to="/payment" className='hover:text-teal-500 gap-2 duration-200 flex items-center pointer'><MdOutlinePayment /> Payment</NavLink> </li>
         <li className='p-4'><NavLink to="/payout" className='hover:text-teal-500 gap-2 duration-200 flex items-center pointer0'><RiMoneyDollarCircleFill /> Payout</NavLink> </li>
 
-        <div className='mx-2 font-bold text-xs text-gray-500'> ACCOUNT </div>
+        <div className='mx-2 my-8  font-bold text-xs text-black'> ACCOUNT </div>
 
         <li className='p-4'><NavLink to="/myprofile" className='hover:text-teal-500 gap-2 duration-200 flex items-center pointer'><CgProfile /> My Profile</NavLink> </li>
         <li className='p-4'><NavLink to="/setting" className='hover:text-teal-500 gap-2 duration-200 flex items-center pointer'><IoSettingsOutline /> Setting</NavLink> </li>

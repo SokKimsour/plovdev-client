@@ -5,18 +5,18 @@ import Homepage from './pages/public/Homepage'
 import CoursesPage from './pages/public/CoursesPage'
 import AboutusPage from './pages/public/AboutusPage'
 import JobBoardPage from './pages/public/JobBoardPage'
-import Navbarhomepage from './components/layout/NavbarHomepage'
 import Footer from './components/layout/Footer'
-import NavbarLogin from './components/layout/NavbarLogin'
+import NavbarBeforeLogin from './components/layout/NavbarBeforeLogin'
 import SidebarUser from './components/layout/SidebarUser'
 import SidebarAdmin from './components/layout/SidebarAdmin'
+import NavbarAfterLogin from './components/layout/NavbarAfterLogin'
 function App() {
 
   return (
     <BrowserRouter>
       <div className='bg-gray-100'>
         <div className='w-[85%] xl:w-[90%] max-xl:w-[94%] max-w-[1440px] m-[auto] p-[auto]  justify-center bg-white '>
-        <Navbarhomepage />
+        <NavbarBeforeLogin />
 
     <Routes >
       <Route path="/" element={<Homepage />} />
@@ -27,11 +27,7 @@ function App() {
 
       <Footer />
 
-      <NavbarLogin />
 
-      <SidebarUser />
-      <SidebarAdmin />
-      
       </div>
       </div>
     </BrowserRouter>
