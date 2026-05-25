@@ -29,10 +29,10 @@ const Navbarhomepage = () => {
           </div>
           <ul className='m-4 max-lg:hidden flex gap-6 items-center '>
             
-            <li className=''><NavLink to="/" className='hover:text-teal-500  duration-200'>Home</NavLink> </li>
-            <li className=''><NavLink to="/courses"  className='hover:text-teal-500  duration-200'>Courses</NavLink></li>
-            <li className=''><NavLink to="/aboutus"  className='hover:text-teal-500  duration-200'>About Us</NavLink></li>
-            <li className=''><NavLink to="/jobboard"  className='hover:text-teal-500  duration-200'>Job Board</NavLink> </li>
+            <li className=''><NavLink to="/" className={({ isActive }) => `hover:text-teal-500 duration-200 ${isActive ? 'text-[#026357]' : ''}`}>Home</NavLink> </li>
+            <li className=''><NavLink to="/courses"  className={({ isActive }) => `hover:text-teal-500 duration-200 ${isActive ? 'text-[#026357]' : ''}`}>Courses</NavLink></li>
+            <li className=''><NavLink to="/aboutus"  className={({ isActive }) => `hover:text-teal-500 duration-200 ${isActive ? 'text-[#026357]' : ''}`}>About Us</NavLink></li>
+            <li className=''><NavLink to="/jobboard"  className={({ isActive }) => `hover:text-teal-500 duration-200 ${isActive ? 'text-[#026357]' : ''}`}>Job Board</NavLink> </li>
   
           </ul>
           {/* search  */}
@@ -69,10 +69,10 @@ const Navbarhomepage = () => {
       <div className ={`bg-white/50 backdrop-blur-sm absolute  right-0   w-full h-svh bg-white  text-lg lg:hidden duration-500 p-8 ${menuOpen ? 'opacity-100' : 'opacity-0'}  `}> 
         <ul >
             
-            <li ><NavLink to="/"  className='hover:text-teal-500  duration-200'>Home</NavLink> </li>
-            <li ><NavLink to="/courses"  className='hover:text-teal-500  duration-200'>Courses</NavLink></li>
-            <li className=''><NavLink to="/aboutus"  className='hover:text-teal-500  duration-200'>About Us</NavLink></li>
-            <li className=''><NavLink to="/jobboard"  className='hover:text-teal-500  duration-200'>Job Board</NavLink> </li>
+            <li ><NavLink to="/"  className={({ isActive }) => `hover:text-teal-500 duration-200 ${isActive ? 'text-[#026357]' : ''}`}>Home</NavLink> </li>
+            <li ><NavLink to="/courses"  className={({ isActive }) => `hover:text-teal-500 duration-200 ${isActive ? 'text-[#026357]' : ''}`}>Courses</NavLink></li>
+            <li className=''><NavLink to="/aboutus"  className={({ isActive }) => `hover:text-teal-500 duration-200 ${isActive ? 'text-[#026357]' : ''}`}>About Us</NavLink></li>
+            <li className=''><NavLink to="/jobboard"  className={({ isActive }) => `hover:text-teal-500 duration-200 ${isActive ? 'text-[#026357]' : ''}`}>Job Board</NavLink> </li>
   
           </ul>
         </div>
