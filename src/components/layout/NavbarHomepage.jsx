@@ -17,10 +17,10 @@ const Navbarhomepage = () => {
 
   return (
     <nav className='fixed top-0 left-0 w-full   z-50  pt-4 '>
-      <div className='bg-white/50 backdrop-blur-sm flex justify-center items-center text-lg  max-w-[80%] max-2xl:w-[96%] mx-auto rounded-3xl border-1 border-amber-300/90
+      <div className='bg-white/50 backdrop-blur-sm flex justify-center items-center text-lg   max-2xl:w-[96%] mx-auto rounded-3xl border-1 border-amber-300/90
  '>
 
-        <div className=' flex justify-between items-center xl:w-[75%] max-2xl:w-[96%] m-4 gap-6 '>
+        <div className=' flex justify-between items-center  max-2xl:w-[96%] m-4 gap-6 '>
           <div className='flex items-center gap-2 cursor-pointer '>
             
             <div className=' text-xl text black '><h1 className="text-2xl font-bold text-black">
@@ -55,7 +55,9 @@ const Navbarhomepage = () => {
                 />
               </div>
           
-          <div className='flex items-center gap-2 '>
+          <div className='flex items-center gap-2'>
+            <div className=' max-sm:hidden'><NavLink to="/instructor" className='hover:text-teal-500  duration-200'>Instructor</NavLink></div>
+            <div className=' max-sm:hidden'><NavLink to="/mylearning" className='hover:text-teal-500  duration-200'>MyLearning</NavLink></div>
             <div className=' w-[44px] h-[44px] rounded-full border-2 border-solid border-gray-200 max-sm:hidden'></div>
             <div className='lg:hidden h-[40px] w-[52px] rounded-md  border-2 border-solid border-gray-200 ' onClick={()=>IsmenuOpen(!menuOpen)}> 
             </div>
