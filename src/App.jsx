@@ -7,6 +7,7 @@ import AboutusPage from './pages/public/AboutusPage'
 import JobBoardPage from './pages/public/JobBoardPage'
 import Navbarhomepage from './components/layout/NavbarHomepage'
 import Footer from './components/layout/Footer'
+import NavbarLogin from './components/layout/NavbarLogin'
 function App() {
 
   return (
@@ -23,6 +24,8 @@ function App() {
     </Routes>
 
       <Footer />
+
+      <NavbarLogin />
       
       </div>
       </div>
