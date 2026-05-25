@@ -39,7 +39,7 @@ const HeroSectionCard = ({
       </div>
       <div className=" w-full bg-black text-white  ">
         <marquee behavior="" direction="">
-          <div className="flex m-4 justify-around ">
+          <div className="flex m-4 justify-around gap-8 ">
             <div>{marque1}</div> 
             <div>{marque2}</div>
             <div>{marque3}</div>
