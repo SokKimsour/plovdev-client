@@ -14,7 +14,7 @@ import { LogOut } from 'lucide-react';
 const SidebarUser = () => {
   return (
     <nav>
-      <ul className='my-8 py-8  items-center w-[250px] bg-white rounded-lg shadow-lg '>
+      <ul className='my-8  items-center w-[250px] rounded-lg '>
 
         <div className='mx-2 my-8 font-bold text-xs text-black'> OVERVIEW </div>
 
@@ -42,7 +42,7 @@ const SidebarUser = () => {
         <li className='p-4'><NavLink to="/setting" className='hover:text-teal-500 gap-2 duration-200 flex items-center pointer'><IoSettingsOutline /> Setting</NavLink> </li>
 
 
-        <div className='pt-4 mt-12 border-t-2 flex justify-center hover:text-red-600'><NavLink to="/setting" className=' gap-2 duration-200 flex items-center pointer'><LogOut /> Logout</NavLink> </div>
+        <div className='pt-8 mt-12 border-t-2 flex px-4 hover:text-red-600'><NavLink to="/setting" className=' gap-2 duration-200 flex items-center pointer'><LogOut /> Logout</NavLink> </div>
 
       </ul>
 

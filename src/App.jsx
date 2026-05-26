@@ -15,7 +15,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className='bg-gray-100'>
-        <div className='w-[85%] xl:w-[90%] max-xl:w-[94%] max-w-[1440px] m-[auto] p-[auto]  justify-center bg-white '>
+        <div className='max-w-[1440px] m-[auto] p-[auto]  justify-center bg-white '>
         <NavbarAfterLogin />
 
     <Routes >
@@ -25,6 +25,8 @@ function App() {
       <Route path="/jobboard" element={<JobBoardPage />} />
       <Route path="/instructor" element={<TeacherDashboard/>}/>
     </Routes>
+
+      <Footer />
 
 
       </div>
