@@ -9,6 +9,7 @@ import TeacherPayment from '../pages/teacher/TeacherPayment';
 import TeacherPayout from '../pages/teacher/TeacherPayout';
 import TeacherProfile from '../pages/teacher/TeacherProfile';
 import TeacherSetting from '../pages/teacher/TeacherSetting';
+import CourseCreator from '../pages/teacher/CourseCreator';
 
 function UserDashboard() {
     return (
@@ -19,7 +20,7 @@ function UserDashboard() {
             <Route path="/student" element={<StudentList />} />
             
             {/* Placeholder for routes being fixed */}
-            <Route path="/createcourse" element={<div>Create Course Page</div>} />
+            <Route path="/createcourse" element={<CourseCreator/>} />
             <Route path="/q&a" element={<TeacherQA/>} />
             <Route path="/payment" element={<TeacherPayment/>} />
             <Route path="/payout" element={<TeacherPayout/>} />
