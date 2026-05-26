@@ -4,6 +4,11 @@ import TeacherDashboard from '../pages/teacher/TeacherDashboard';
 import TeacherLearning from '../pages/teacher/TeacherLearning';
 import StudentList from '../pages/teacher/StudentList';
 import TeacherCourse from '../pages/teacher/TeacherCourse';
+import TeacherQA from '../pages/teacher/TeacherQA';
+import TeacherPayment from '../pages/teacher/TeacherPayment';
+import TeacherPayout from '../pages/teacher/TeacherPayout';
+import TeacherProfile from '../pages/teacher/TeacherProfile';
+import TeacherSetting from '../pages/teacher/TeacherSetting';
 
 function UserDashboard() {
     return (
@@ -15,11 +20,11 @@ function UserDashboard() {
             
             {/* Placeholder for routes being fixed */}
             <Route path="/createcourse" element={<div>Create Course Page</div>} />
-            <Route path="/q&a" element={<div>Q&A Page</div>} />
-            <Route path="/payment" element={<div>Payment Page</div>} />
-            <Route path="/payout" element={<div>Payout Page</div>} />
-            <Route path="/myprofile" element={<div>My Profile Page</div>} />
-            <Route path="/setting" element={<div>Setting Page</div>} />
+            <Route path="/q&a" element={<TeacherQA/>} />
+            <Route path="/payment" element={<TeacherPayment/>} />
+            <Route path="/payout" element={<TeacherPayout/>} />
+            <Route path="/myprofile" element={<TeacherProfile/>} />
+            <Route path="/setting" element={<TeacherSetting/>} />
         </Routes>
     );
 }
