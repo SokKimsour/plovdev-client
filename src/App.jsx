@@ -24,7 +24,6 @@ function App() {
             <Route path="/jobboard" element={<JobBoardPage />} />
           </Routes>
 
-          <CourseCard />
           <Footer />
         </div>
       </div>
