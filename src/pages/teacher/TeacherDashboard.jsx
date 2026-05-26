@@ -7,35 +7,35 @@ import { PiMoneyWavyBold } from "react-icons/pi";
 import { FaStar } from "react-icons/fa";
 import { FaShoppingBag } from "react-icons/fa";
 import { GrCertificate } from "react-icons/gr";
+import { Play } from 'lucide-react';
 
 
 const stats = [
   {
     label: "Total Student",
     value: "1100",
-    icon: <FaGraduationCap/>,
+    icon: <FaGraduationCap />,
     sub: "8↑ Students",
     subColor: "text-gray-400",
   },
   {
     label: "Total Courses",
     value: "8",
-    icon: <PiVideoFill/>,
+    icon: <PiVideoFill />,
     sub: "2 Pending",
     subColor: "text-amber-500",
   },
   {
     label: "Total Revenue",
     value: "$2,022",
-    valueSup: ".99",
-    icon: <PiMoneyWavyBold/>,
+    icon: <PiMoneyWavyBold />,
     sub: "12↑ Last mont",
     subColor: "text-gray-400",
   },
   {
     label: "Rating",
     value: "4.5",
-    icon: <FaStar/>,
+    icon: <FaStar />,
     sub: "0.1↑ Average Rating",
     subColor: "text-gray-400",
     star: true,
@@ -43,8 +43,8 @@ const stats = [
 ];
 
 const smallStats = [
-  { label: "Total Purchased", value: "2", icon: <FaShoppingBag/> },
-  { label: "Total Certificate", value: "1", icon: <GrCertificate/>},
+  { label: "Total Purchased", value: "2", icon: <FaShoppingBag /> },
+  { label: "Total Certificate", value: "1", icon: <GrCertificate /> },
 ];
 
 const courses = [
@@ -54,6 +54,11 @@ const courses = [
   { title: "Complete Python Bootcamp: Zero to Hero", lessons: "12 Lesson", status: "Pending Review", students: 120, revenue: "$1200", rating: 4.8 },
 ];
 
+const purchasedCourses = [
+  { id: 1, title: "Modern React with Redux", upNext: "Section 5: State in React", progress: 45 },
+  { id: 2, title: "The Web Developer Bootcamp 2024", upNext: "Section 12: CSS Flexbox", progress: 12 },
+];
+
 const tabs = ["My Course", "Purchased", "Certificate"];
 
 export default function TeacherDashboard() {
@@ -61,16 +66,16 @@ export default function TeacherDashboard() {
 
   return (
     <div className="min-h-screen w-full m-[auto] p-[auto] mt-28  bg-gray-100 font-sans">
-      <NavbarAfterLogin/>
+      <NavbarAfterLogin />
 
       <div className="flex w-full max-w-[1440px]">
         {/* Sidebar */}
-        <div className=" left-0 pt-[-20px] ">
-          <SidebarUser/>
+        <div className="fixed left-0 pt-[-20px] z-50">
+          <SidebarUser />
         </div>
 
         {/* Main Content */}
-        <main className="flex-1 p-8 bg-gray-100 ">
+        <main className="flex-1 p-8 bg-gray-100 ml-[250px]">
           {/* Combined Stats Cards - Responsive Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-8 mb-6">
             {stats.map((stat) => (
@@ -101,9 +106,9 @@ export default function TeacherDashboard() {
                 </div>
               </div>
             ))}
-          </div>  
+          </div>
 
-          {/* Course Table */}
+          {/* Content Section */}
           <div className="bg-white rounded-xl mt-20 shadow-sm border border-amber-400 overflow-hidden">
             {/* Tabs */}
             <div className="flex gap-10 px-6 pt-5 pb-0 border-b border-gray-100">
@@ -111,68 +116,110 @@ export default function TeacherDashboard() {
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`pb-3 text-lg font-semibold transition-colors border-b-2 ${
-                    activeTab === tab
+                  className={`pb-3 text-lg font-semibold transition-colors border-b-2 ${activeTab === tab
                       ? "border-gray-900 text-gray-900"
                       : "border-transparent text-gray-400 hover:text-gray-600"
-                  }`}
+                    }`}
                 >
                   {tab}
                 </button>
               ))}
             </div>
 
-            {/* Table wrapper for horizontal scroll on mobile */}
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="text-gray-400 text-lg border-b border-gray-100">
-                    <th className="text-left px-6 py-6 font-bold">Course</th>
-                    <th className="text-left px-4 py-3 font-bold">Status</th>
-                    <th className="text-left px-4 py-3 font-bold">Student</th>
-                    <th className="text-left px-4 py-3 font-bold">Revenue</th>
-                    <th className="text-left px-4 py-3 font-bold">Rating</th>
-                    <th className="text-left px-4 py-3 font-bold">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {courses.map((course, i) => (
-                    <tr key={i} className="border-b border-gray-50 hover:bg-gray-50 transition-colors">
-                      <td className="px-6 py-4">
+            {/* Tab Content */}
+            <div className="p-4">
+              {activeTab === "My Course" && (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="text-gray-400 text-lg border-b border-gray-100">
+                        <th className="text-left px-6 py-6 font-bold">Course</th>
+                        <th className="text-left px-4 py-3 font-bold">Status</th>
+                        <th className="text-left px-4 py-3 font-bold">Student</th>
+                        <th className="text-left px-4 py-3 font-bold">Revenue</th>
+                        <th className="text-left px-4 py-3 font-bold">Rating</th>
+                        <th className="text-left px-4 py-3 font-bold">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {courses.map((course, i) => (
+                        <tr key={i} className="border-b border-gray-50 hover:bg-gray-50 transition-colors">
+                          <td className="px-6 py-4">
+                            <div className="flex items-center gap-3">
+                              <div className="w-16 h-12 bg-amber-400 rounded-md flex-shrink-0" />
+                              <div>
+                                <p className="font-medium text-gray-800">{course.title}</p>
+                                <p className="text-md text-gray-400">{course.lessons}</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="px-4 py-4">
+                            <span
+                              className={`font-semibold text-xs ${course.status === "Published"
+                                  ? "text-green-500"
+                                  : "text-amber-500"
+                                }`}
+                            >
+                              {course.status}
+                            </span>
+                          </td>
+                          <td className="px-4 py-4 text-gray-700">{course.students}</td>
+                          <td className="px-4 py-4 text-gray-700">{course.revenue}</td>
+                          <td className="px-4 py-4">
+                            <span className="text-gray-700">{course.rating}</span>
+                            <span className="text-amber-400 ml-1">⭐</span>
+                          </td>
+                          <td className="px-4 py-4">
+                            <button className="flex items-center gap-1 text-xs border border-gray-200 rounded px-3 py-1.5 hover:bg-gray-100 transition-colors text-gray-600 font-medium">
+                              <span className="text-gray-400">···</span> Edit
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+
+              {activeTab === "Purchased" && (
+                <div className="flex flex-col gap-4">
+                  {purchasedCourses.map((course) => (
+                    <div key={course.id} className="flex items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                      <div className="w-32 h-20 bg-cyan-400 rounded-lg flex-shrink-0" />
+                      <div className="flex-1 min-w-0">
+                        <p className="font-bold text-gray-900 text-sm mb-1">{course.title}</p>
+                        <p className="text-xs text-gray-400 mb-2">Up next: {course.upNext}</p>
                         <div className="flex items-center gap-3">
-                          <div className="w-16 h-12 bg-amber-400 rounded-md flex-shrink-0" />
-                          <div>
-                            <p className="font-medium text-gray-800">{course.title}</p>
-                            <p className="text-md text-gray-400">{course.lessons}</p>
+                          <div className="flex-1 bg-gray-200 rounded-full h-2 overflow-hidden">
+                            <div
+                              className="bg-amber-400 h-2 rounded-full transition-all"
+                              style={{ width: `${course.progress}%` }}
+                            />
                           </div>
+                          <span className="text-xs text-gray-500 whitespace-nowrap">{course.progress}% complete</span>
                         </div>
-                      </td>
-                      <td className="px-4 py-4">
-                        <span
-                          className={`font-semibold text-xs ${
-                            course.status === "Published"
-                              ? "text-green-500"
-                              : "text-amber-500"
-                          }`}
-                        >
-                          {course.status}
-                        </span>
-                      </td>
-                      <td className="px-4 py-4 text-gray-700">{course.students}</td>
-                      <td className="px-4 py-4 text-gray-700">{course.revenue}</td>
-                      <td className="px-4 py-4">
-                        <span className="text-gray-700">{course.rating}</span>
-                        <span className="text-amber-400 ml-1">⭐</span>
-                      </td>
-                      <td className="px-4 py-4">
-                        <button className="flex items-center gap-1 text-xs border border-gray-200 rounded px-3 py-1.5 hover:bg-gray-100 transition-colors text-gray-600 font-medium">
-                          <span className="text-gray-400">···</span> Edit
-                        </button>
-                      </td>
-                    </tr>
+                      </div>
+                      <button className="flex items-center gap-2 bg-cyan-400 hover:bg-cyan-500 text-white font-semibold text-sm px-5 py-3 rounded-xl transition-colors flex-shrink-0">
+                        <Play size={14} className="fill-white" />
+                        Resume Video
+                      </button>
+                    </div>
                   ))}
-                </tbody>
-              </table>
+                </div>
+              )}
+
+              {activeTab === "Certificate" && (
+                <div className="p-6 flex flex-wrap gap-4">
+                  <div className="w-60 h-80 bg-red-700 rounded-xl flex flex-col items-center justify-end pb-8 shadow-md cursor-pointer hover:scale-105 transition-transform">
+                    <div className="flex items-center gap-2 bg-white/10 rounded-lg px-3 py-2">
+                      <div className="w-7 h-7 bg-amber-400 rounded-md flex items-center justify-center">
+                        <span className="text-black font-black text-sm">»</span>
+                      </div>
+                      <span className="text-white font-bold text-sm tracking-wide">PlovDev</span>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </main>

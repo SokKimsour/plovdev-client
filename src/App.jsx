@@ -9,7 +9,7 @@ import NavbarBeforeLogin from './components/layout/NavbarBeforeLogin'
 import SidebarUser from './components/layout/SidebarUser'
 import SidebarAdmin from './components/layout/SidebarAdmin'
 import NavbarAfterLogin from './components/layout/NavbarAfterLogin'
-import TeacherDashboard from './pages/teacher/TeacherDashboard'
+import UserDashboard from './route/UserDashboard'
 
 function App() {
   return (
@@ -23,10 +23,8 @@ function App() {
       <Route path="/courses" element={<CoursesPage />} />
       <Route path="/aboutus" element={<AboutusPage />} />
       <Route path="/jobboard" element={<JobBoardPage />} />
-      <Route path="/instructor" element={<TeacherDashboard/>}/>
+      <Route path="/instructor/*" element={<UserDashboard/>}/>
     </Routes>
-
-      <Footer />
 
 
       </div>
