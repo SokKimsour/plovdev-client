@@ -16,10 +16,10 @@ export const getAllCourses = async () => {
     }
 
     const data = await response.json();
-    console.log("courses data", data);
+    console.log("courses data in service:", data);  
     return data ?? [];
   } catch (error) { 
-    console.error("Error fetching courses:", error);
+    console.error("Error fetching courses:", error.message);
     return [];
   }
 };

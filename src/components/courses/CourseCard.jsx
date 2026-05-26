@@ -1,19 +1,7 @@
 // import CourseImg from '../../assets/HomeHeroimage.png'
 
-import { useEffect } from "react";
-import { getAllCourses } from "../../services/Course.service";
-
-  export function Couses() {
-    useEffect(() => {
-      const handleFetchCourses = async () => {
-        const data = await getAllCourses();
-        console.log("courses data in component", data);
-      };
-      handleFetchCourses();
-    }, []);
-  }
-
 export default function CourseCard({
+  img,
   title,
   duration,
   category,
@@ -28,9 +16,11 @@ export default function CourseCard({
         <div className="relative">
           <div className="">
             <img
-              className="rounded-lg"
+              alt={title || "Course thumbnail"}
+              className="h-[180px] w-full rounded-lg object-cover"
               src={
-                "https://i.pinimg.com/736x/8e/5d/86/8e5d86a7639eb6d9e18d6787489724d6.jpg"
+                img ||
+                "https://i.pinimg.com/1200x/01/7c/44/017c44c97a38c1c4999681e28c39271d.jpg"
               }
             />
           </div>
