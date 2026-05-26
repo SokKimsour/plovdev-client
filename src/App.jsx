@@ -16,7 +16,8 @@ function App() {
     <BrowserRouter>
       <div className='bg-gray-100'>
         <div className='w-[85%] xl:w-[90%] max-xl:w-[94%] max-w-[1440px] m-[auto] p-[auto]  justify-center bg-white '>
-        <NavbarBeforeLogin />
+        {/* <NavbarBeforeLogin /> */}
+        <NavbarAfterLogin />
 
     <Routes >
       <Route path="/" element={<Homepage />} />
