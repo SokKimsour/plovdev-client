@@ -3,6 +3,7 @@
 export default function CourseCard({
   img,
   title,
+  teacher,
   duration,
   category,
   rating,
@@ -12,11 +13,11 @@ export default function CourseCard({
 }) {
   return (
     <>
-      <div className="m-12 w-[209px] h-[350px] border-1 border-gray-300 rounded-lg relative bg-white">
+      <div className="m-12 w-[230px] h-[300px] border-1 border-gray-300 rounded-lg relative  shadow-lg ">
         <div className="relative">
           <div className="">
             <img
-              alt={title || "Course thumbnail"}
+              // alt={title || "Course thumbnail"}
               className="h-[180px] w-full rounded-lg object-cover"
               src={
                 img ||
@@ -24,18 +25,19 @@ export default function CourseCard({
               }
             />
           </div>
-          <div className="absolute bottom-8 left-3 bg-black text-white px-4 text-sm">
+          <div className="absolute bottom-6 left-3 bg-black text-white px-4 text-sm">
             {duration}
           </div>
         </div>
-        <div className="bg-white w-[207px] h-[30px] top-[60%] absolute"></div>
-        <div className="p-4 ">
+        <div className='bg-white w-[230px] h-[30px] top-[55%] absolute'></div>
+        <div className="p-4  ">
           <div className="text-orange-500 text-sm text-bold font-bold">
             {category}
           </div>
           <div className="text-sm">{title}</div>
+          <div className="text-sm text-gray-500">{teacher}</div>
 
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center ">
             <div className="text-[8px] text-orange-500 flex gap-1">
               {rating}
               <div>⭐⭐⭐⭐⭐</div>
@@ -43,7 +45,7 @@ export default function CourseCard({
             </div>
             <div className="flex items-center gap-1">
               <div className="font-bold text-sm">{price}</div>
-              <div className="text-[8px] text-red-900">{oldPrice}</div>
+              <div className="text-[8px] text-red-900 ">{oldPrice}</div>
             </div>
           </div>
         </div>

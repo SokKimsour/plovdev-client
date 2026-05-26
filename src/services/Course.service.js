@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_BASE_URL ;
+const API_URL = import.meta.env.VITE_API_BASE_URL?.trim() || "" ;
 const BASE_URL = `${API_URL}/api/v1/courses`;
 
 export const getAllCourses = async () => {
@@ -18,8 +18,8 @@ export const getAllCourses = async () => {
     const data = await response.json();
     console.log("courses data in service:", data);  
     return data ?? [];
-  } catch (error) { 
-    console.error("Error fetching courses:", error.message);
+  } catch (error) {   
+    console.log("Error fetching courses:", error.message);
     return [];
   }
 };
