@@ -10,6 +10,7 @@ import NavbarBeforeLogin from './components/layout/NavbarBeforeLogin'
 import SidebarUser from './components/layout/SidebarUser'
 import SidebarAdmin from './components/layout/SidebarAdmin'
 import NavbarAfterLogin from './components/layout/NavbarAfterLogin'
+import CourseCard from './components/courses/CourseCard'
 function App() {
 
   return (
@@ -17,7 +18,6 @@ function App() {
       <div className='bg-gray-100'>
         <div className='w-[85%] xl:w-[90%] max-xl:w-[94%] max-w-[1440px] m-[auto] p-[auto]  justify-center bg-white '>
         <NavbarBeforeLogin />
-        {/* <NavbarAfterLogin /> */}
 
     <Routes >
       <Route path="/" element={<Homepage />} />
@@ -25,9 +25,8 @@ function App() {
       <Route path="/aboutus" element={<AboutusPage />} />
       <Route path="/jobboard" element={<JobBoardPage />} />
     </Routes>
-       
-       <SidebarAdmin />
-       <SidebarUser />
+
+      <CourseCard />  
       <Footer />
 
 
