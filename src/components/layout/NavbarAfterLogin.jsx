@@ -48,7 +48,7 @@ const NavbarAfterLogin = () => {
             <div className=' max-md:hidden'><NavLink to="/instructor" className='hover:text-teal-500  duration-200'>Instructor</NavLink></div>
             <div className=' max-md:hidden'><NavLink to="/mylearning" className='hover:text-teal-500  duration-200'>MyLearning</NavLink></div>
             <div className=' w-[44px] h-[44px] rounded-full border-2 border-solid border-gray-200 max-sm:hidden'></div>
-            <div className='lg:hidden h-[40px] w-[52px] rounded-md  border-2 border-solid border-gray-200 justify-center flex items-center' onClick={()=>IsmenuOpen(!menuOpen)}>  <Menu />
+            <div className='lg:hidden h-[40px] w-[52px]  justify-center flex items-center' onClick={()=>IsmenuOpen(!menuOpen)}>  <Menu />
             </div>
 
           </div>

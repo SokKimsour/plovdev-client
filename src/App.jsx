@@ -25,7 +25,9 @@ function App() {
       <Route path="/aboutus" element={<AboutusPage />} />
       <Route path="/jobboard" element={<JobBoardPage />} />
     </Routes>
-
+       
+       <SidebarAdmin />
+       <SidebarUser />
       <Footer />
 
 
