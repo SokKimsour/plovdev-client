@@ -49,7 +49,7 @@ const NavbarBeforeLogin = () => {
             <div className=' max-md:hidden'><NavLink to="/signup" className='hover:text-white text-white  bg-teal-400 rounded-md active:text-black p-2 duration-200'>
             Signup Free</NavLink></div>
             
-            <div className='lg:hidden h-[40px] w-[52px] rounded-md  border-2 border-solid border-gray-200 justify-center flex items-center' onClick={()=>IsmenuOpen(!menuOpen)}> <Menu />
+            <div className='lg:hidden h-[40px] w-[52px] rounded-md   justify-center flex items-center' onClick={()=>IsmenuOpen(!menuOpen)}> <Menu />
             </div>
 
           </div>
