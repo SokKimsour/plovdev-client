@@ -105,7 +105,7 @@ const AdminJobsPage = () => {
               <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">{stat.title}</p>
               <h3 className="text-3xl font-bold text-slate-800 mt-2">{stat.value}</h3>
             </div>
-            <div className="p-3 bg-slate-50 rounded-full text-slate-700">
+            <div className="p-3 border border-slate-205 rounded-full text-slate-700">
               {stat.icon}
             </div>
           </div>

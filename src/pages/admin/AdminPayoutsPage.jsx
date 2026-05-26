@@ -25,8 +25,8 @@ const AdminPayoutsPage = () => {
             <p className="text-xs font-bold text-slate-800 uppercase tracking-wider">Pending Requests</p>
             <h3 className="text-4xl font-bold text-slate-900 mt-2">24</h3>
           </div>
-          <div className="p-3 bg-slate-900/10 rounded-full text-slate-800">
-            <Clock className="h-10 w-10 text-slate-850 stroke-[1.5]" />
+          <div className="p-3 border border-slate-900/20 rounded-full text-slate-850">
+            <Clock className="h-10 w-10 stroke-[1.5]" />
           </div>
         </div>
 
@@ -36,7 +36,7 @@ const AdminPayoutsPage = () => {
             <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Amount to Pay</p>
             <h3 className="text-4xl font-bold text-slate-800 mt-2">$ $12,450</h3>
           </div>
-          <div className="p-3 bg-slate-50 rounded-full text-slate-700">
+          <div className="p-3 border border-slate-200 rounded-full text-slate-700">
             <DollarSign className="h-10 w-10 stroke-[1.5]" />
           </div>
         </div>
@@ -47,7 +47,7 @@ const AdminPayoutsPage = () => {
             <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Paid Out</p>
             <h3 className="text-4xl font-bold text-slate-800 mt-2">$ $145,200</h3>
           </div>
-          <div className="p-3 bg-green-50 rounded-full text-green-600">
+          <div className="p-3 border border-green-200 rounded-full text-green-600">
             <CheckCircle2 className="h-10 w-10 stroke-[1.5]" />
           </div>
         </div>

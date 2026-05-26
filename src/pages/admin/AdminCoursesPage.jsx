@@ -57,13 +57,11 @@ const AdminCoursesPage = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((stat, index) => (
           <div key={index} className="bg-white rounded-xl shadow-sm border border-slate-100 p-5 flex flex-col justify-between h-[130px]">
-            <div className="flex justify-between items-start">
-              <div>
-                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">{stat.title}</p>
-                <h3 className="text-3xl font-bold text-slate-850 mt-2">{stat.value}</h3>
-              </div>
-              <div className={`p-2.5 rounded-lg ${stat.isAlert ? 'bg-red-50' : 'bg-slate-50'}`}>
-                {stat.icon}
+            <div className="flex flex-col">
+              <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">{stat.title}</p>
+              <div className="flex items-center gap-3 mt-4">
+                <div className="pr-2">{stat.icon}</div>
+                <h3 className="text-3xl font-bold text-slate-900 leading-none">{stat.value}</h3>
               </div>
             </div>
             {/* Trend */}

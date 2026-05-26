@@ -7,7 +7,7 @@ const AdminLayout = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-[#E5E7EB] flex flex-col font-sans">
+    <div className="h-screen bg-[#E5E7EB] flex flex-col font-sans overflow-hidden">
       {/* Standard User Header */}
       <NavbarAfterLogin />
 
