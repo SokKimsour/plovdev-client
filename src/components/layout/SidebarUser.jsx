@@ -14,7 +14,7 @@ import { LogOut } from 'lucide-react';
 const SidebarUser = () => {
   return (
     <nav>
-      <ul className='m-8 py-8  items-center w-[250px] bg-white rounded-lg shadow-lg '>
+      <ul className='my-8 py-8  items-center w-[250px] bg-white rounded-lg shadow-lg '>
 
         <div className='mx-2 my-8 font-bold text-xs text-black'> OVERVIEW </div>
 
