@@ -26,21 +26,20 @@ export default function TeacherCourse() {
 
             <div className="flex w-full max-w-[1440px] mx-auto">
                 {/* Sidebar */}
-                <div className="fixed left-0 pt-[-20px] z-50">
                     <SidebarUser />
-                </div>
+                
 
                 {/* Main Content */}
-                <main className="flex-1 p-8 ml-[250px] bg-gray-100">
-                    <h1 className="text-3xl font-bold text-gray-900 mb-6">Manage your course</h1>
+                <main className="flex-1 p-8 bg-gray-100">
+                    <h1 className="text-3xl font-bold text-gray-900 mb-12">Manage your course</h1>
 
                     {/* Tabs */}
-                    <div className="flex gap-8 mb-6">
+                    <div className="flex gap-8 mb-8">
                         {tabs.map((tab) => (
                             <button
                                 key={tab}
                                 onClick={() => setActiveTab(tab)}
-                                className={`text-sm font-semibold border-b-2 pb-1 transition-colors ${activeTab === tab
+                                className={`text-sm font-semibold border-b-2 pb-2 transition-colors ${activeTab === tab
                                         ? "border-gray-900 text-gray-900"
                                         : "border-transparent text-gray-400 hover:text-gray-600"
                                     }`}
@@ -51,7 +50,7 @@ export default function TeacherCourse() {
                     </div>
 
                     {/* Course Grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mb-12 gap-5">
                         {filteredCourses.map((course) => (
                             <div key={course.id} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200">
                                 {/* Thumbnail */}

@@ -139,17 +139,15 @@ export default function TeacherDashboard() {
   const [activeTab, setActiveTab] = useState("My Course");
 
   return (
-    <div className="min-h-screen w-full m-[auto] p-[auto] mt-28  bg-gray-100 font-sans">
+    <div className="min-h-screen w-full bg-gray-100 font-sans pt-28">
       <NavbarAfterLogin />
 
-      <div className="flex w-full max-w-[1440px]">
+      <div className="flex w-full max-w-[1440px] mx-auto">
         {/* Sidebar */}
-        <div className="fixed left-0 pt-[-20px] z-50">
-          <SidebarUser />
-        </div>
+        <SidebarUser />
 
         {/* Main Content */}
-        <main className="flex-1 p-8 bg-gray-100 ml-[250px]">
+        <main className="flex-1 p-8 bg-gray-100">
           {/* Combined Stats Cards - Responsive Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-8 mb-6">
             {stats.map((stat) => (
@@ -183,7 +181,7 @@ export default function TeacherDashboard() {
           </div>
 
           {/* Content Section */}
-          <div className="bg-white rounded-xl mt-20 shadow-sm border border-amber-400 overflow-hidden">
+          <div className="bg-white rounded-xl mt-8 shadow-sm border border-amber-400 overflow-hidden">
             {/* Tabs */}
             <div className="flex gap-10 px-6 pt-5 pb-0 border-b border-gray-100">
               {tabs.map((tab) => (

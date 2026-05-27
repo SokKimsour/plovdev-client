@@ -68,14 +68,12 @@ export default function StudentList() {
 
       <div className="flex w-full max-w-[1440px] mx-auto">
         {/* Sidebar */}
-        <div className="fixed left-0 pt-[-20px] z-50">
           <SidebarUser/>
-        </div>
 
         {/* Main Content */}
-        <main className="flex-1 p-8 ml-[250px] bg-gray-100">
+        <main className="flex-1 p-8 bg-gray-100">
           {/* Header row */}
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-12">
             <h1 className="text-3xl font-bold text-gray-900">Student List</h1>
             <div className="flex items-center gap-2">
               <div className="flex items-center bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 gap-2 w-56">

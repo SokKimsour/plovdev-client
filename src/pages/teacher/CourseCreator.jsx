@@ -351,7 +351,7 @@ function BasicInfoForm() {
   };
 
   return (
-    <div className="flex-1 px-10 py-8 bg-white min-h-screen">
+    <div className="flex-1 ml-[80px] px-10 py-8 min-h-screen">
       <h1 className="text-3xl font-black text-gray-900 tracking-tight">Course Info</h1>
       <p className="text-sm text-gray-500 mt-1 mb-8">Define the core identity of your PlovDev course.</p>
 
@@ -491,12 +491,12 @@ function PricingForm() {
   };
 
   return (
-    <div className="flex-1 px-10 py-8 bg-white min-h-screen relative">
+    <div className="flex-1 px-10 py-8 min-h-screen relative ml-[80px]">
       <h1 className="text-3xl font-black text-gray-900 tracking-tight">Pricing</h1>
       <p className="text-sm text-gray-500 mt-1 mb-8">Value your knowledge and reach your audience.</p>
 
       {/* Pricing card */}
-      <div className="max-w-2xl border border-gray-100 rounded-2xl shadow-sm py-12 flex flex-col items-center gap-6">
+      <div className="max-w-2xl border bg-white border-gray-100 rounded-2xl shadow-sm py-12 flex flex-col items-center gap-6">
 
         {/* Icon */}
         <div className="w-20 h-20 rounded-full bg-yellow-100 flex items-center justify-center">
@@ -550,7 +550,7 @@ function PricingForm() {
       </div>
 
       {/* Request Publish */}
-      <div className="fixed bottom-8 right-10">
+      <div className="fixed right-[28%] mt-5">
         <button className="px-8 py-4 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold text-base rounded-2xl shadow-lg transition-colors">
           Request Publish
         </button>
@@ -697,7 +697,7 @@ export default function CourseCreator() {
         <SidebarUser/>
 
         {/* Step panel */}
-        <div className="w-56 bg-white border-r border-gray-100 py-6 px-4 flex-shrink-0">
+        <div className="w-56 bg-gray-100 border-r border-gray-100 py-6 px-4 flex-shrink-0">
           <button 
             onClick={() => setActiveStep("Basic Info")}
             className={`flex items-center gap-3 w-full px-3 py-3 rounded-xl transition-colors mb-2 ${
@@ -750,7 +750,7 @@ export default function CourseCreator() {
           {activeStep === "Basic Info" && <BasicInfoForm />}
           
           {activeStep === "Curriculum" && (
-            <main className="px-10 py-8">
+            <main className="px-10 py-8 ml-[80px]">
               <div className="flex items-start justify-between mb-2">
                 <div>
                   <h1 className="text-3xl font-black text-gray-900 tracking-tight">Curriculum</h1>

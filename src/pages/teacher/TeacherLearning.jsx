@@ -34,16 +34,14 @@ export default function TeacherLearning() {
 
       <div className="flex w-full max-w-[1440px] mx-auto">
         {/* Sidebar */}
-        <div className="fixed left-0 pt-[-20px] z-50">
           <SidebarUser/>
-        </div>
 
         {/* Main Content */}
-        <main className="flex-1 p-8 ml-[250px] bg-gray-100">
-          <h1 className="text-3xl font-bold text-gray-900 mb-6">My Learning</h1>
+        <main className="flex-1 p-8  bg-gray-100">
+          <h1 className="text-3xl font-bold text-gray-900 mb-12">My Learning</h1>
 
           {/* Tabs */}
-          <div className="flex gap-8 mb-4">
+          <div className="flex gap-8 mb-8">
             {tabs.map((tab) => (
               <button
                 key={tab.label}
@@ -112,10 +110,7 @@ export default function TeacherLearning() {
           {/* Favorite Tab */}
           {activeTab === "Favorite" && (
             <div className="border border-amber-400 rounded-xl bg-white p-6 min-h-96">
-              <div className="flex gap-6 mb-6 border-b border-gray-100 pb-3">
-                <button className="text-sm font-bold text-gray-900 border-b-2 border-gray-900 pb-1 -mb-4">Courses</button>
-                <button className="text-sm font-medium text-gray-400 hover:text-gray-600 transition-colors">Jobs</button>
-              </div>
+
               {favoriteCourses.map((course) => (
                 <div key={course.id} className="flex items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
                   <div className="w-28 h-20 bg-cyan-400 rounded-lg flex-shrink-0" />
