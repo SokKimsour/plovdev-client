@@ -4,7 +4,7 @@ import { GoGoal } from "react-icons/go";
 import { PiCertificate } from "react-icons/pi";
 const ValueSection = () => {
   return (
-    <div className=' grid grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1 text-center my-28 max-md:my-12 my-18 gap-12 max-lg:gap-8 max-md:gap-6 max-sm:gap-4'>
+    <div className=' grid grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1 text-center px-8 my-28 max-md:my-12 my-18 gap-12 max-lg:gap-8 max-md:gap-6 max-sm:gap-4'>
             <div>
                 <div className="flex justify-center items-center"><PiEyeBold className='text-2xl' /></div>
                 <div className='text-2xl mb-6'>

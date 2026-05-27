@@ -8,7 +8,7 @@ import { BiSupport } from "react-icons/bi";
 
 const BenefitBar = () => {
   return (
-    <div className="mt-28 px-4 text-center grid grid-cols-5  max-sm:grid-cols-2  max-md:grid-cols-3 max-lg:grid-cols-4 gap-12 max-lg:gap-8 max-md:gap-6 max-sm:gap-4">
+    <div className="mt-28 px-8 text-center grid grid-cols-5  max-sm:grid-cols-2  max-md:grid-cols-3 max-lg:grid-cols-4 gap-12 max-lg:gap-8 max-md:gap-6 max-sm:gap-4">
       <div>
         <div className="flex justify-center items-center">
           <MdOutlineComputer className="text-6xl " />{" "}
