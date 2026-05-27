@@ -1,6 +1,8 @@
 import React from 'react'
 import Aboutimage from "../../assets/AboutHeroimage.png"
 import HeroSectionCard from '../../components/layout/HeroSectionCard'
+import BenefitBar from '../../components/about/BenefitBar'
+import ValueSection from '../../components/about/ValueSection'
 const AboutusPage = () => {
   return (
     <div className=' m-[auto] p-[auto] mt-28  '>
@@ -22,6 +24,9 @@ real skill and become job-ready."
         marque6="From beginner to job-ready - PlovDev is your path to a tech career."
 
         />
+
+        <BenefitBar />
+        <ValueSection />
   </div>
   )
 }
