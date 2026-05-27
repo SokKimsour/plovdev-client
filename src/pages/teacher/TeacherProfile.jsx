@@ -57,19 +57,12 @@ export default function TeacherProfile() {
 
           {/* Profile Card */}
           <div className="relative bg-amber-100 border border-amber-400 rounded-2xl p-6 flex items-center gap-6">
-            {/* Edit icon top-right */}
-            <button className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors">
-              <Pencil size={16} />
-            </button>
-
+            
             {/* Avatar */}
             <div className="relative flex-shrink-0">
               <div className="w-28 h-28 rounded-full bg-gray-600 overflow-hidden flex items-center justify-center">
                 <UserCircle size={80} className="text-gray-400" />
               </div>
-              <button className="absolute bottom-1 right-1 w-8 h-8 bg-white rounded-full border border-gray-200 shadow flex items-center justify-center hover:bg-gray-50 transition-colors">
-                <Pencil size={13} className="text-gray-500" />
-              </button>
             </div>
 
             {/* Info */}
@@ -92,9 +85,6 @@ export default function TeacherProfile() {
 
           {/* About Me Card */}
           <div className="relative bg-white rounded-2xl shadow-sm p-6">
-            <button className="absolute top-5 right-5 text-gray-400 hover:text-gray-600 transition-colors">
-              <Pencil size={16} />
-            </button>
             <h3 className="text-lg font-bold text-gray-900 mb-3">About Me</h3>
             <p className="text-gray-600 text-sm leading-relaxed max-w-2xl">
               I am a passionate Python teacher dedicated to helping students understand programming in a simple and practical way.
@@ -105,9 +95,6 @@ export default function TeacherProfile() {
 
           {/* Stats Cards */}
           <div className="relative">
-            <button className="absolute -top-2 right-0 text-gray-400 hover:text-gray-600 transition-colors">
-              <Pencil size={16} />
-            </button>
             <div className="grid grid-cols-4 gap-4 mt-4">
               {stats.map((stat) => (
                 <div key={stat.label} className="bg-white rounded-xl p-5 shadow-sm">

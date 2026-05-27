@@ -6,35 +6,17 @@ import {
 import NavbarAfterLogin from "../../components/layout/NavbarAfterLogin";
 import SidebarUser from "../../components/layout/SidebarUser";
 
-const navGroups = [
-  {
-    section: "OVERVIEW",
-    items: [
-      { label: "Dashboard", icon: <LayoutDashboard size={15} /> },
-      { label: "My course", icon: <BookOpen size={15} /> },
-      { label: "My learning", icon: <GraduationCap size={15} /> },
-      { label: "Student", icon: <Users size={15} /> },
-    ],
-  },
-  {
-    section: "CONTENT",
-    items: [
-      { label: "Create course", icon: <PlusCircle size={15} /> },
-      { label: "Q & A", icon: <MessageSquare size={15} /> },
-      { label: "Payments", icon: <CreditCard size={15} /> },
-      { label: "Payouts", icon: <Wallet size={15} /> },
-    ],
-  },
-  {
-    section: "ACCOUNT",
-    items: [
-      { label: "My Profile", icon: <UserCircle size={15} /> },
-      { label: "Setting", icon: <Settings size={15} />, active: true },
-    ],
-  },
-];
-
 export default function TeacherSetting() {
+  // User Info State
+  const [fullName, setFullName] = useState("Heng Alexander");
+  const [email, setEmail] = useState("heng.alexander@example.com");
+  
+  // About Me State
+  const [aboutMe, setAboutMe] = useState(
+    "I am a passionate Python teacher dedicated to helping students understand programming in a simple and practical way. I focus on building strong fundamentals, problem-solving skills, and real-world applications."
+  );
+
+  // Password State
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -44,13 +26,65 @@ export default function TeacherSetting() {
       {/* Navbar */}
       <NavbarAfterLogin/>
 
-      <div className="flex w-full max-w-[1440px]">
+      <div className="flex w-full max-w-[1440px] mx-auto">
         {/* Sidebar */}
         <SidebarUser/>
 
         {/* Main Content */}
-        <main className="flex-1 p-8">
-          <div className="border border-amber-400 rounded-2xl p-10 max-w-2xl">
+        <main className="flex-1 p-8 space-y-8">
+          
+          {/* User Information Form */}
+          <div className="border border-amber-400 rounded-2xl p-10 max-w-2xl bg-white shadow-sm">
+            <h2 className="text-2xl font-bold text-gray-900 mb-8">User Information</h2>
+            <div className="flex flex-col gap-5">
+              <div>
+                <label className="block text-sm font-semibold text-gray-800 mb-2">Full Name</label>
+                <input
+                  type="text"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  placeholder="Enter your full name"
+                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-700 bg-white outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-300 transition-all"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-800 mb-2">Email Address</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-700 bg-white outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-300 transition-all"
+                />
+              </div>
+              <button className="w-full bg-yellow-400 hover:bg-yellow-500 rounded-xl py-3 text-sm font-bold text-gray-900 transition-colors mt-2">
+                Save Information
+              </button>
+            </div>
+          </div>
+
+          {/* About Me Form */}
+          <div className="border border-amber-400 rounded-2xl p-10 max-w-2xl bg-white shadow-sm">
+            <h2 className="text-2xl font-bold text-gray-900 mb-8">About Me</h2>
+            <div className="flex flex-col gap-5">
+              <div>
+                <label className="block text-sm font-semibold text-gray-800 mb-2">Short Bio</label>
+                <textarea
+                  value={aboutMe}
+                  onChange={(e) => setAboutMe(e.target.value)}
+                  placeholder="Tell students about yourself..."
+                  rows={4}
+                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-700 bg-white outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-300 transition-all resize-none"
+                />
+              </div>
+              <button className="w-full bg-yellow-400 hover:bg-yellow-500 rounded-xl py-3 text-sm font-bold text-gray-900 transition-colors mt-2">
+                Update Bio
+              </button>
+            </div>
+          </div>
+
+          {/* Change Password Form */}
+          <div className="border border-amber-400 rounded-2xl p-10 max-w-2xl bg-white shadow-sm">
             <h2 className="text-2xl font-bold text-gray-900 mb-8">Change Password</h2>
 
             <div className="flex flex-col gap-5">
@@ -62,7 +96,7 @@ export default function TeacherSetting() {
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
                   placeholder="••••••"
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-700 bg-white outline-none focus:ring-2 focus:ring-cyan-300 placeholder-gray-300"
+                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-700 bg-white outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-300 transition-all"
                 />
               </div>
 
@@ -74,7 +108,7 @@ export default function TeacherSetting() {
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   placeholder="••••••"
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-700 bg-white outline-none focus:ring-2 focus:ring-cyan-300 placeholder-gray-300"
+                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-700 bg-white outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-300 transition-all"
                 />
               </div>
 
@@ -86,13 +120,13 @@ export default function TeacherSetting() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="••••••"
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-700 bg-white outline-none focus:ring-2 focus:ring-cyan-300 placeholder-gray-300"
+                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-700 bg-white outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-300 transition-all"
                 />
               </div>
 
               {/* Submit Button */}
-              <button className="w-full border border-gray-200 rounded-xl py-3 text-sm font-semibold text-gray-800 hover:bg-gray-50 transition-colors mt-2">
-                Update password
+              <button className="w-full bg-yellow-400 hover:bg-yellow-500 text-black rounded-xl py-3 text-sm font-bold transition-colors mt-2">
+                Update Password
               </button>
             </div>
           </div>
