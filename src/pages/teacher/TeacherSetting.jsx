@@ -1,12 +1,72 @@
 import { useState } from "react";
 import {
   LayoutDashboard, BookOpen, GraduationCap, Users, PlusCircle,
-  MessageSquare, CreditCard, Wallet, UserCircle, Settings, LogOut
+  MessageSquare, CreditCard, Wallet, UserCircle, Settings, LogOut,
+  Sun, Moon
 } from "lucide-react";
 import NavbarAfterLogin from "../../components/layout/NavbarAfterLogin";
 import SidebarUser from "../../components/layout/SidebarUser";
 
 export default function TeacherSetting() {
+  // Appearance State
+  const [isDarkMode, setIsDarkMode] = useState(
+    typeof window !== "undefined" && document.getElementById("global-dark-mode") !== null
+  );
+
+  const toggleDarkMode = () => {
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    
+    let styleEl = document.getElementById("global-dark-mode");
+    if (newMode) {
+      if (!styleEl) {
+        styleEl = document.createElement("style");
+        styleEl.id = "global-dark-mode";
+        styleEl.innerHTML = `
+          /* Overall Page Background */
+          body, main, .bg-gray-100 {
+            background-color: black !important;
+          }
+          
+          /* Card Box Boxes (Stats, Sections, etc.) */
+          /* We use a very dark gray so they are visible against the pure black body */
+          .bg-white, .bg-gray-50, .bg-amber-100, .rounded-xl, .rounded-2xl, .border {
+            background-color: #121212 !important;
+            border-color: #2a2a2a !important;
+          }
+
+          /* General Text to White */
+          h1, h2, h3, h4, p, span, label, td, th, div, a, button {
+            color: white !important;
+          }
+
+          /* Ensure icons (lucide, react-icons) are white */
+          svg {
+            color: white !important;
+            fill: none; /* keep lucide style */
+          }
+          
+          /* Special case for icons that should be filled */
+          .fill-amber-400, .fill-white {
+            fill: white !important;
+          }
+
+          /* Input Fields */
+          input, textarea, select {
+            background-color: #1a1a1a !important;
+            color: white !important;
+            border-color: #333 !important;
+          }
+        `;
+        document.head.appendChild(styleEl);
+      }
+    } else {
+      if (styleEl) {
+        styleEl.remove();
+      }
+    }
+  };
+
   // User Info State
   const [fullName, setFullName] = useState("Heng Alexander");
   const [email, setEmail] = useState("heng.alexander@example.com");
@@ -22,7 +82,7 @@ export default function TeacherSetting() {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   return (
-    <div className="min-h-screen w-full m-[auto] p-[auto] mt-28  bg-gray-100 font-sans">
+    <div className="min-h-screen w-full m-[auto] p-[auto] mt-28 bg-gray-100 font-sans transition-colors duration-300">
       {/* Navbar */}
       <NavbarAfterLogin/>
 
@@ -33,8 +93,30 @@ export default function TeacherSetting() {
         {/* Main Content */}
         <main className="flex-1 p-8 space-y-8">
           
+          {/* Appearance Section */}
+          <div className="border border-amber-400 rounded-2xl p-10 max-w-2xl bg-white shadow-sm transition-colors duration-300">
+            <h2 className="text-2xl font-bold text-gray-900 mb-8">Appearance</h2>
+            <div className="flex items-center justify-between p-4 border border-gray-100 rounded-xl bg-gray-50">
+              <div className="flex items-center gap-3">
+                <div className={`p-2 rounded-lg ${isDarkMode ? "bg-indigo-500/20 text-indigo-400" : "bg-yellow-500/20 text-yellow-500"}`}>
+                  {isDarkMode ? <Moon size={20} /> : <Sun size={20} />}
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-gray-900">Dark Mode</p>
+                  <p className="text-xs text-gray-500">Toggle dark background across all pages</p>
+                </div>
+              </div>
+              <button 
+                onClick={toggleDarkMode}
+                className={`relative w-14 h-7 rounded-full transition-colors duration-300 focus:outline-none ${isDarkMode ? "bg-indigo-600" : "bg-gray-300"}`}
+              >
+                <div className={`absolute top-1 left-1 w-5 h-5 bg-white rounded-full transition-transform duration-300 transform ${isDarkMode ? "translate-x-7" : "translate-x-0 shadow-sm"}`} />
+              </button>
+            </div>
+          </div>
+
           {/* User Information Form */}
-          <div className="border border-amber-400 rounded-2xl p-10 max-w-2xl bg-white shadow-sm">
+          <div className="border border-amber-400 rounded-2xl p-10 max-w-2xl bg-white shadow-sm transition-colors duration-300">
             <h2 className="text-2xl font-bold text-gray-900 mb-8">User Information</h2>
             <div className="flex flex-col gap-5">
               <div>
@@ -64,7 +146,7 @@ export default function TeacherSetting() {
           </div>
 
           {/* About Me Form */}
-          <div className="border border-amber-400 rounded-2xl p-10 max-w-2xl bg-white shadow-sm">
+          <div className="border border-amber-400 rounded-2xl p-10 max-w-2xl bg-white shadow-sm transition-colors duration-300">
             <h2 className="text-2xl font-bold text-gray-900 mb-8">About Me</h2>
             <div className="flex flex-col gap-5">
               <div>
@@ -84,7 +166,7 @@ export default function TeacherSetting() {
           </div>
 
           {/* Change Password Form */}
-          <div className="border border-amber-400 rounded-2xl p-10 max-w-2xl bg-white shadow-sm">
+          <div className="border border-amber-400 rounded-2xl p-10 max-w-2xl bg-white shadow-sm transition-colors duration-300">
             <h2 className="text-2xl font-bold text-gray-900 mb-8">Change Password</h2>
 
             <div className="flex flex-col gap-5">

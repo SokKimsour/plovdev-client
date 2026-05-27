@@ -15,18 +15,17 @@ function App() {
   return (
       <div className='bg-gray-100'>
         <div className='max-w-[1440px] m-[auto] p-[auto]  justify-center bg-white '>
-        <NavbarAfterLogin />
+          <NavbarAfterLogin />
 
-    <Routes >
-      <Route path="/" element={<Homepage />} />
-      <Route path="/courses" element={<CoursesPage />} />
-      <Route path="/aboutus" element={<AboutusPage />} />
-      <Route path="/jobboard" element={<JobBoardPage />} />
-      <Route path="/instructor/*" element={<UserDashboard/>}/>
-    </Routes>
+          <Routes >
+            <Route path="/" element={<Homepage />} />
+            <Route path="/courses" element={<CoursesPage />} />
+            <Route path="/aboutus" element={<AboutusPage />} />
+            <Route path="/jobboard" element={<JobBoardPage />} />
+            <Route path="/instructor/*" element={<UserDashboard/>}/>
+          </Routes>
+        </div>
       </div>
-      </div>
-   
   );
 }
 

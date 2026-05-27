@@ -61,6 +61,80 @@ const purchasedCourses = [
 
 const tabs = ["My Course", "Purchased", "Certificate"];
 
+function Certificate({
+  studentName = "JOHN DOE",
+  courseName = "Web Development Immersive",
+  courseDescription = "An intensive, comprehensive program covering advanced frontend development, backend API design, database modeling, and production deployment practices.",
+  issuedOn = "May 26, 2026",
+  credentialId = "PD-20260526-992",
+  verifyUrl = "plovdev.com/verify/PD-20260526-992",
+  signatoryName = "Chhorn Crymonyvann",
+  signatoryTitle = "Founder, PlovDev",
+}) {
+  return (
+    <div className="w-full bg-white border border-gray-200 rounded-lg shadow-sm">
+      {/* Inner border */}
+      <div className="border border-gray-200 rounded-md m-6 px-14 py-12 flex flex-col min-h-[560px]">
+
+        {/* Top row: logo + issued date */}
+        <div className="flex items-start justify-between mb-20">
+          <div className="text-2xl font-bold">
+            <span className="text-blue-600">Plov</span>
+            <span className="text-gray-900">Dev</span>
+          </div>
+          <div className="text-right">
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest">Issued On</p>
+            <p className="text-sm font-semibold text-gray-800 mt-0.5">{issuedOn}</p>
+          </div>
+        </div>
+
+        {/* Center content */}
+        <div className="flex-1 flex flex-col items-center text-center">
+          <p className="text-xs font-bold text-blue-600 uppercase tracking-[0.25em] mb-5">
+            Certificate of Completion
+          </p>
+          <p className="text-sm text-gray-500 mb-3">This is to certify that</p>
+          <h1 className="text-5xl font-black text-gray-900 tracking-tight mb-4">{studentName}</h1>
+          <p className="text-sm text-gray-500 mb-3">has successfully completed the course</p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">{courseName}</h2>
+          <p className="text-sm text-gray-500 max-w-lg leading-relaxed">{courseDescription}</p>
+        </div>
+
+        {/* Bottom row: credential + signature */}
+        <div className="flex items-end justify-between mt-20">
+          <div>
+            <p className="text-xs text-gray-700">
+              <span className="font-semibold">Credential ID:</span> {credentialId}
+            </p>
+            <p className="text-xs text-gray-500 mt-0.5">
+              Verify at:{" "}
+              <a href={`https://${verifyUrl}`} className="text-blue-600 hover:underline">
+                {verifyUrl}
+              </a>
+            </p>
+            <p className="text-xs text-gray-400 mt-3 max-w-sm">
+              PlovDev Academy has confirmed the identity of this individual and their participation in the course.
+            </p>
+          </div>
+
+          <div className="flex flex-col items-end">
+            {/* Cursive signature */}
+            <p
+              className="text-3xl text-blue-800 mb-1"
+              style={{ fontFamily: "'Dancing Script', 'Brush Script MT', cursive" }}
+            >
+              {signatoryName}
+            </p>
+            <div className="w-44 border-t border-gray-300 mb-2" />
+            <p className="text-xs font-semibold text-gray-700">{signatoryName}</p>
+            <p className="text-xs text-gray-400">{signatoryTitle}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function TeacherDashboard() {
   const [activeTab, setActiveTab] = useState("My Course");
 
@@ -143,7 +217,7 @@ export default function TeacherDashboard() {
                     </thead>
                     <tbody>
                       {courses.map((course, i) => (
-                        <tr key={i} className="border-b border-gray-50 hover:bg-gray-50 transition-colors">
+                        <tr key={i} className="border-b border-gray-50">
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-3">
                               <div className="w-16 h-12 bg-amber-400 rounded-md flex-shrink-0" />
@@ -210,14 +284,8 @@ export default function TeacherDashboard() {
 
               {activeTab === "Certificate" && (
                 <div className="p-6 flex flex-wrap gap-4">
-                  <div className="w-60 h-80 bg-red-700 rounded-xl flex flex-col items-center justify-end pb-8 shadow-md cursor-pointer hover:scale-105 transition-transform">
-                    <div className="flex items-center gap-2 bg-white/10 rounded-lg px-3 py-2">
-                      <div className="w-7 h-7 bg-amber-400 rounded-md flex items-center justify-center">
-                        <span className="text-black font-black text-sm">»</span>
-                      </div>
-                      <span className="text-white font-bold text-sm tracking-wide">PlovDev</span>
-                    </div>
-                  </div>
+                  <Certificate />
+
                 </div>
               )}
             </div>
