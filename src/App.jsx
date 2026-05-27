@@ -12,7 +12,6 @@ import NavbarAfterLogin from "./components/layout/NavbarAfterLogin";
 import CourseCard from "./components/courses/CourseCard";
 function App() {
   return (
-    <BrowserRouter>
       <div className="bg-gray-100">
         <div className="w-[85%] xl:w-[90%] max-xl:w-[94%] max-w-[1440px] m-[auto] p-[auto]  justify-center bg-white ">
           <NavbarBeforeLogin />
@@ -23,11 +22,10 @@ function App() {
             <Route path="/aboutus" element={<AboutusPage />} />
             <Route path="/jobboard" element={<JobBoardPage />} />
           </Routes>
-
+            
           <Footer />
         </div>
       </div>
-    </BrowserRouter>
   );
 }
 

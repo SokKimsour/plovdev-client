@@ -1,6 +1,7 @@
 import React from 'react'
 import HeroSectionCard from '../../components/layout/HeroSectionCard'
 import Homeimage from '../../assets/HomepageHeroimage.png'
+import ValueSection from '../../components/about/ValueSection'
 const HomePage = () => {
   return (
     <div className=' m-[auto] p-[auto] mt-28  '>
@@ -19,7 +20,7 @@ const HomePage = () => {
         marque6="css"
 
         />
-
+    <ValueSection />
         
        
     </div>
