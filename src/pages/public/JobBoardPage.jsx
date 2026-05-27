@@ -1,6 +1,7 @@
 import React from 'react'
 import HeroSectionCard from '../../components/layout/HeroSectionCard'
 import JobBoardimage from '../../assets/JobHeroimage.png'
+import JobCard from '../../components/jobs/JobCard'
 
 const JobBoardPage = () => {
   return (
@@ -22,6 +23,8 @@ to established tech firms — they come to us because they want talent like you.
         marque6="PPCBank"
 
         />
+
+        <JobCard />
   </div>
   )
 }
