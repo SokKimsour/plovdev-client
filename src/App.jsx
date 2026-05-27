@@ -13,7 +13,6 @@ import UserDashboard from './route/UserDashboard'
 
 function App() {
   return (
-
       <div className='bg-gray-100'>
         <div className='max-w-[1440px] m-[auto] p-[auto]  justify-center bg-white '>
         <NavbarAfterLogin />
@@ -25,8 +24,6 @@ function App() {
       <Route path="/jobboard" element={<JobBoardPage />} />
       <Route path="/instructor/*" element={<UserDashboard/>}/>
     </Routes>
-
-
       </div>
       </div>
    
