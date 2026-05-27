@@ -43,13 +43,6 @@ const AdminCoursesPage = () => {
           <button className="p-2 border border-gray-300 bg-white rounded-lg text-slate-600 hover:bg-slate-50 duration-200">
             <SlidersHorizontal size={18} />
           </button>
-          {/* Add Course button */}
-          <button className="flex items-center gap-2 bg-black hover:bg-slate-800 text-white text-xs font-semibold px-4 py-2 rounded-lg duration-200 shadow-sm">
-            <span className="bg-white text-black rounded-full p-0.5 flex items-center justify-center">
-              <Plus size={12} className="stroke-[3]" />
-            </span>
-            Add Course
-          </button>
         </div>
       </div>
 

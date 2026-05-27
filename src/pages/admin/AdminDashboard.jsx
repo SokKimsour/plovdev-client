@@ -1,5 +1,5 @@
 import React from 'react'
-import { Users, Play, GraduationCap, Briefcase, TrendingUp, ArrowUpRight } from 'lucide-react'
+import { Users, Play, GraduationCap, Briefcase, TrendingUp, ArrowUpRight, DollarSign } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const AdminDashboard = () => {
@@ -39,15 +39,10 @@ const AdminDashboard = () => {
     },
     {
       title: 'Total Revenue',
-      value: '$2,022.99',
+      value: '$2,023',
       change: '12%',
       timeframe: 'From last month',
-      icon: (
-        <div className="flex items-center text-slate-800">
-          <span className="text-2xl font-bold">$</span>
-          <TrendingUp className="h-6 w-6 ml-0.5" />
-        </div>
-      ),
+      icon: <DollarSign className="h-8 w-8 text-slate-800" />,
     },
     {
       title: 'Open Job',
@@ -74,7 +69,7 @@ const AdminDashboard = () => {
   })
 
   return (
-    <div className="flex flex-col gap-8 pb-12">
+    <div className="flex flex-col gap-8 pb-12 mt-20">
       {/* Title */}
       <div>
         <h1 className="text-3xl font-bold text-slate-900">Admin Dashboard</h1>
@@ -83,7 +78,7 @@ const AdminDashboard = () => {
       {/* Grid Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((stat, index) => (
-          <div key={index} className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 flex flex-col justify-between h-[160px]">
+          <div key={index} className="bg-white rounded-xl shadow-xl border border-slate-100 p-6 flex flex-col justify-between h-[160px]">
             {/* Top Row: Title & Icon next to Value */}
             <div className="flex flex-col">
               <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">{stat.title}</p>

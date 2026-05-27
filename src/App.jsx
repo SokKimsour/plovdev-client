@@ -123,7 +123,13 @@ function App() {
         </Route>
 
         {/* Instructor/Teacher Routes */}
-        <Route path="/instructor/*" element={<UserDashboard />} />
+        <Route path="/instructor/*" 
+        
+        
+        
+        
+        
+        element={<UserDashboard />} />
       </Routes>
     </BrowserRouter>
   )
