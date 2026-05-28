@@ -43,7 +43,7 @@ export async function VerifyOTP({ userId, code }) {
 }
 
 export async function VerifyRegisterOTP({ userId, code }) {
-  const response = await axiosClient.post("/auth/verify-email", {
+  const response = await axiosClient.post("/auth/verify-otp", {
     userId,
     code,
   });
