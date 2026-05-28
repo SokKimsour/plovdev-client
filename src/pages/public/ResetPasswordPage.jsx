@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ResetPassword } from "../../api/authAPI";
+import { useAuth } from "../../context/AuthContext";
 
 const EyeIcon = ({ open }) => (
   <svg
@@ -25,6 +25,7 @@ const EyeIcon = ({ open }) => (
 );
 
 const ResetPasswordPage = ({ onNavigate, navigationState }) => {
+  const { resetUserPassword } = useAuth();
   // Retrieve email passed from previous screen or default
   const email = navigationState?.email || "your email";
 
@@ -57,7 +58,7 @@ const ResetPasswordPage = ({ onNavigate, navigationState }) => {
     setLoading(true);
 
     try {
-      const response = await ResetPassword({ email, password });
+      const response = await resetUserPassword(password);
       setSuccessMsg(response.message || "Password updated successfully!");
 
       // Wait a bit, then redirect to login page
@@ -65,7 +66,7 @@ const ResetPasswordPage = ({ onNavigate, navigationState }) => {
         onNavigate("login", { resetCompleted: true });
       }, 2000);
     } catch (err) {
-      setError(err.message || "Failed to reset password. Please try again.");
+      setError(err.response?.data?.message || err.message || "Failed to reset password. Please try again.");
     } finally {
       setLoading(false);
     }

@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-import { VerifyOTP, ForgotPassword } from "../../api/authAPI";
+import { useAuth } from "../../context/AuthContext";
 
 const OTPPage = ({ onNavigate, navigationState }) => {
+  const { verifyOTP, requestPasswordReset } = useAuth();
   // Retrieve email and state parameters from props instead of router location
   const email = navigationState?.email || "your email";
+  const userId = navigationState?.userId;
   const fromSignup = navigationState?.fromSignup || false;
   const fromForgotPassword = navigationState?.fromForgotPassword || false;
 
@@ -77,14 +79,14 @@ const OTPPage = ({ onNavigate, navigationState }) => {
     setLoading(true);
     
     try {
-      await ForgotPassword({ email });
+      await requestPasswordReset(email);
       setSuccessMsg("A new 4-digit code has been sent!");
       setTimer(30);
       setCanResend(false);
       setOtp(["", "", "", ""]);
       inputRefs[0].current.focus();
     } catch (err) {
-      setError(err.message || "Failed to resend code.");
+      setError(err.response?.data?.message || err.message || "Failed to resend code.");
     } finally {
       setLoading(false);
     }
@@ -105,7 +107,7 @@ const OTPPage = ({ onNavigate, navigationState }) => {
     setLoading(true);
 
     try {
-      const response = await VerifyOTP({ email, otp: otpCode });
+      const response = await verifyOTP(userId, otpCode, fromForgotPassword);
       setSuccessMsg(response.message || "Verified successfully!");
 
       setTimeout(() => {
@@ -116,7 +118,7 @@ const OTPPage = ({ onNavigate, navigationState }) => {
         }
       }, 1500);
     } catch (err) {
-      setError(err.message || "Invalid verification code. Please check and try again.");
+      setError(err.response?.data?.message || err.message || "Invalid verification code. Please check and try again.");
     } finally {
       setLoading(false);
     }

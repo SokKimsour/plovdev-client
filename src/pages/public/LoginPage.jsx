@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LogIn } from "../../api/authAPI";
+import { useAuth } from "../../context/AuthContext";
 
 const GoogleIcon = () => (
   <svg
@@ -49,7 +49,8 @@ const EyeIcon = ({ open }) => (
   </svg>
 );
 
-const LoginPage = ({ onNavigate, setAccessToken }) => {
+const LoginPage = ({ onNavigate }) => {
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -58,7 +59,7 @@ const LoginPage = ({ onNavigate, setAccessToken }) => {
   const [successMsg, setSuccessMsg] = useState("");
 
   const handleGoogleLogin = () => {
-    console.log("Google Auth clicked");
+    window.location.href = `${import.meta.env.VITE_API_BASE_URL}/auth/google`;
   };
 
   const handleSignIn = async (e) => {
@@ -70,16 +71,13 @@ const LoginPage = ({ onNavigate, setAccessToken }) => {
     setError("");
     setLoading(true);
     try {
-      const data = await LogIn({ email, password });
-      if (setAccessToken) {
-        setAccessToken(data.accessToken);
-      }
+      await login(email, password);
       setSuccessMsg("Logged in successfully! Redirecting...");
       setTimeout(() => {
         onNavigate("home");
       }, 1500);
     } catch (err) {
-      setError(err.message || "Invalid credentials.");
+      setError(err.response?.data?.message || err.message || "Invalid credentials.");
     } finally {
       setLoading(false);
     }

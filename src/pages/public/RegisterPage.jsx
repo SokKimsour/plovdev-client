@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SignUp } from "../../api/authAPI";
+import { useAuth } from "../../context/AuthContext";
 
 const GoogleIcon = () => (
   <svg
@@ -50,6 +50,7 @@ const EyeIcon = ({ open }) => (
 );
 
 const RegisterPage = ({ onNavigate }) => {
+  const { signUp } = useAuth();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -59,7 +60,7 @@ const RegisterPage = ({ onNavigate }) => {
   const [successMsg, setSuccessMsg] = useState("");
 
   const handleGoogleSignup = () => {
-    console.log("Google Auth clicked");
+    window.location.href = `${import.meta.env.VITE_API_BASE_URL}/auth/google`;
   };
 
   const handleSignup = async (e) => {
@@ -71,13 +72,13 @@ const RegisterPage = ({ onNavigate }) => {
     setError("");
     setLoading(true);
     try {
-      const user = await SignUp({ fullName, email, password });
+      const response = await signUp(fullName, email, password);
       setSuccessMsg("Account created! Redirecting to OTP verification...");
       setTimeout(() => {
-        onNavigate("otp", { email, userId: user?.userId, fromSignup: true });
+        onNavigate("otp", { email, userId: response?.userId, fromSignup: true });
       }, 1500);
     } catch (err) {
-      setError(err.message || "Sign up failed!");
+      setError(err.response?.data?.message || err.message || "Sign up failed!");
     } finally {
       setLoading(false);
     }
