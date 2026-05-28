@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { ForgotPassword } from "../../api/authAPI";
+import { useAuth } from "../../context/AuthContext";
 
 const ForgotPasswordPage = ({ onNavigate }) => {
+  const { requestPasswordReset } = useAuth();
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
@@ -18,15 +19,15 @@ const ForgotPasswordPage = ({ onNavigate }) => {
     setLoading(true);
 
     try {
-      const response = await ForgotPassword({ email });
+      const response = await requestPasswordReset(email);
       setSuccessMsg(response.message || "Verification code sent successfully!");
       
       // Delay navigation slightly so user sees the success message
       setTimeout(() => {
-        onNavigate("otp", { email, fromForgotPassword: true });
+        onNavigate("otp", { email, userId: response?.userId, fromForgotPassword: true });
       }, 1500);
     } catch (err) {
-      setError(err.message || "Failed to send verification code. Please try again.");
+      setError(err.response?.data?.message || err.message || "Failed to send verification code. Please try again.");
     } finally {
       setLoading(false);
     }
