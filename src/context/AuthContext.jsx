@@ -97,7 +97,13 @@ export const AuthProvider = ({ children }) => {
     if (isForgotPassword) {
       return await VerifyOTP({ userId, code });
     } else {
-      return await VerifyRegisterOTP({ userId, code });
+      const response = await VerifyRegisterOTP({ userId, code });
+      if (response.accessToken) {
+        updateToken(response.accessToken);
+        const meResponse = await GetMe();
+        setUser(meResponse.user);
+      }
+      return response;
     }
   };
 

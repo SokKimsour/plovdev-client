@@ -114,7 +114,7 @@ const OTPPage = ({ onNavigate, navigationState }) => {
         if (fromForgotPassword) {
           onNavigate("reset-password", { email });
         } else {
-          onNavigate("login", { registered: true });
+          onNavigate("home");
         }
       }, 1500);
     } catch (err) {
