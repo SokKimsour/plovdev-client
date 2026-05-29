@@ -71,10 +71,16 @@ const LoginPage = ({ onNavigate }) => {
     setError("");
     setLoading(true);
     try {
-      await login(email, password);
+      const user = await login(email, password);
       setSuccessMsg("Logged in successfully! Redirecting...");
       setTimeout(() => {
-        onNavigate("home");
+        if (user.role === "admin") {
+          onNavigate("admin");
+        } else if (user.role === "teacher") {
+          onNavigate("instructor");
+        } else {
+          onNavigate("home");
+        }
       }, 1500);
     } catch (err) {
       setError(err.response?.data?.message || err.message || "Invalid credentials.");
